@@ -1,0 +1,74 @@
+/* General Body Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar Styles */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+textarea::-webkit-scrollbar {
+    width: 8px;
+}
+textarea::-webkit-scrollbar-track {
+    background: transparent;
+}
+textarea::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 20px;
+}
+.dark textarea::-webkit-scrollbar-thumb {
+    background-color: #334155;
+}
+
+/* Animations */
+@keyframes subtle-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+.animate-float {
+    animation: subtle-float 6s ease-in-out infinite;
+}
+.glow-text {
+    text-shadow: 0 0 20px rgba(139, 61, 255, 0.3);
+}
+.primary-glow-btn {
+    box-shadow: 0 0 15px rgba(122, 47, 247, 0.4);
+    transition: all 0.3s ease;
+}
+.primary-glow-btn:hover {
+    box-shadow: 0 0 25px rgba(122, 47, 247, 0.6);
+    transform: translateY(-2px);
+}
+.trajectory-path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: dash 5s linear forwards infinite;
+    filter: drop-shadow(0 0 5px #7A2FF7);
+}
+@keyframes dash {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+.text-gradient {
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(to right, #a855f7, #d8b4fe);
+}
+
+.purple-glow {
+    box-shadow: 0 0 120px -20px rgba(168, 85, 247, 0.4);
+}
+.gradient-text {
+    background: linear-gradient(135deg, #A855F7 0%, #D8B4FE 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

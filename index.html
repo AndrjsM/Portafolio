@@ -2,180 +2,532 @@
 <html lang="es"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>RJS LAB Home - Hero Section V2</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<title>RJS LAB Home - Hero Section</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Outfit:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
 <script>
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        primary: "#7A2FF7",
-                        "primary-dark": "#5e22be",
-                        "secondary-purple": "#3B0A6F",
-                        "background-light": "#F8FAFC", // Cool gray/white for light mode
-                        "background-dark": "#0B0B10", // Requested deep dark
-                        "surface-dark": "#13131A",
-                    },
-                    fontFamily: {
-                        display: ["Outfit", "sans-serif"],
-                        body: ["Outfit", "sans-serif"],
-                    },
-                    borderRadius: {
-                        DEFAULT: "0.5rem",
-                    },
-                    backgroundImage: {
-                        'hero-gradient': 'linear-gradient(135deg, #0B0B10 0%, #1A0B2E 50%, #0B0B10 100%)',
-                    }
-                },
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#8B3DFF", // A vibrant purple as the primary anchor
+              "primary-glow": "#A855F7",
+              "background-light": "#F8FAFC",
+              "background-dark": "#0B0B10",
+              "surface-dark": "#13131A",
+              "accent-purple": "#7A2FF7",
+              "deep-purple": "#3B0A6F",
             },
-        };
+            fontFamily: {
+              display: ["Outfit", "sans-serif"],
+              body: ["Inter", "sans-serif"],
+            },
+            backgroundImage: {
+              'hero-gradient': 'radial-gradient(circle at 80% 20%, #3B0A6F 0%, #0B0B10 50%), radial-gradient(circle at 20% 80%, #1e1b4b 0%, #0B0B10 40%)',
+              'rocket-trail': 'linear-gradient(to right, transparent, #8B3DFF, transparent)',
+            },
+          },
+        },
+      };
     </script>
-<link rel="stylesheet" href="public/css/style.css">
+<style>@keyframes subtle-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-float {
+            animation: subtle-float 6s ease-in-out infinite;
+        }
+        .glow-text {
+            text-shadow: 0 0 20px rgba(139, 61, 255, 0.3);
+        }
+        .primary-glow-btn {
+            box-shadow: 0 0 15px rgba(122, 47, 247, 0.4);
+            transition: all 0.3s ease;
+        }
+        .primary-glow-btn:hover {
+            box-shadow: 0 0 25px rgba(122, 47, 247, 0.6);
+            transform: translateY(-2px);
+        }.trajectory-path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: dash 5s linear forwards infinite;
+            filter: drop-shadow(0 0 5px #7A2FF7);
+        }
+        @keyframes dash {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+    </style>
 </head>
-<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white transition-colors duration-300 min-h-screen flex flex-col overflow-x-hidden">
-<nav class="fixed w-full z-50 backdrop-blur-md bg-white/70 dark:bg-[#0B0B10]/80 border-b border-slate-200 dark:border-white/10">
+<body class="font-body bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-200 antialiased selection:bg-primary selection:text-white min-h-screen flex flex-col transition-colors duration-300">
+<nav class="fixed w-full z-50 top-0 left-0 border-b border-slate-200 dark:border-slate-800/50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="flex items-center justify-between h-20">
-<div class="flex-shrink-0 flex items-center gap-3 cursor-pointer">
-<img alt="RJS LAB Rocket Logo" class="h-10 w-10 rounded-lg object-cover" src="public/images/logo.png"/>
-<span class="font-bold text-xl tracking-tight text-slate-800 dark:text-white">RJS LAB</span>
-</div>
-<div class="hidden md:block">
-<div class="ml-10 flex items-baseline space-x-8">
-<a class="text-primary font-medium px-3 py-2 rounded-md text-sm transition-colors" href="index.html">Inicio</a>
-<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors" href="services.html">Servicios</a>
-<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors" href="about.html">Portafolio</a>
-<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors" href="contact.html">Contacto</a>
+<div class="flex justify-between items-center h-20">
+<div class="flex-shrink-0 flex items-center gap-3 group cursor-pointer">
+<div class="relative w-10 h-10 overflow-hidden rounded-lg bg-gradient-to-br from-deep-purple to-accent-purple p-0.5">
+<div class="w-full h-full bg-background-dark flex items-center justify-center rounded-[7px]">
+<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
 </div>
 </div>
-<div class="flex items-center gap-4">
-<button class="p-2 rounded-full text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/10 focus:outline-none transition-colors" id="theme-toggle">
-<span class="material-icons-round text-xl dark:hidden">dark_mode</span>
-<span class="material-icons-round text-xl hidden dark:block">light_mode</span>
-</button>
-<a class="hidden md:inline-flex items-center justify-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-white bg-primary hover:bg-primary-dark transition-colors shadow-lg shadow-primary/30" href="#">
-                        Comenzar
+<span class="font-display font-bold text-xl tracking-tight text-slate-900 dark:text-white group-hover:text-primary transition-colors">RJS LAB</span>
+</div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors" href="#">Inicio</a>
+<a class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors" href="#servicios">Servicios</a>
+<a class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors" href="#nosotros">Nosotros</a>
+<a href="#contacto" class="ml-4 px-5 py-2.5 rounded-full border border-slate-300 dark:border-slate-700 text-sm font-medium text-slate-700 dark:text-white hover:border-primary hover:text-primary dark:hover:border-primary dark:hover:text-primary transition-all duration-300">
+                        Contactar
                     </a>
+</div>
+<div class="md:hidden flex items-center">
+<button class="text-slate-600 dark:text-slate-300 hover:text-primary focus:outline-none">
+<span class="material-icons text-3xl">menu</span>
+</button>
 </div>
 </div>
 </div>
 </nav>
-<section class="relative pt-20 flex-grow flex items-center justify-center overflow-hidden">
-<div class="absolute inset-0 w-full h-full -z-10 bg-background-light dark:bg-background-dark">
-<div class="absolute inset-0 bg-white dark:bg-gradient-to-br dark:from-[#0B0B10] dark:via-[#150a25] dark:to-[#0B0B10] opacity-100"></div>
-<div class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px] pointer-events-none mix-blend-multiply dark:mix-blend-screen"></div>
-<div class="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-[#3B0A6F]/30 rounded-full blur-[100px] pointer-events-none mix-blend-multiply dark:mix-blend-screen"></div>
-<svg class="absolute bottom-0 left-0 w-full h-full pointer-events-none opacity-40 dark:opacity-60" fill="none" viewBox="0 0 1440 800" xmlns="http://www.w3.org/2000/svg">
-<path d="M-100 850 C 200 800, 400 600, 600 400 C 800 200, 1100 100, 1500 50" stroke="url(#trajectory-gradient)" stroke-dasharray="10 10" stroke-linecap="round" stroke-width="2"></path>
-<path class="blur-sm" d="M-100 850 C 200 800, 400 600, 600 400 C 800 200, 1100 100, 1500 50" stroke="url(#trajectory-gradient)" stroke-opacity="0.2" stroke-width="8"></path>
+<main class="flex-grow relative flex items-center justify-center pt-20 overflow-hidden">
+<div class="absolute inset-0 bg-background-light dark:bg-background-dark z-0">
+<div class="absolute inset-0 hidden dark:block bg-hero-gradient opacity-60"></div>
+<div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 dark:opacity-10 mix-blend-overlay pointer-events-none"></div>
+<svg class="absolute bottom-0 left-0 w-full h-full pointer-events-none z-0 opacity-20 dark:opacity-40" fill="none" viewBox="0 0 1440 800" xmlns="http://www.w3.org/2000/svg">
+<path class="trajectory-path hidden md:block" d="M-100 800 C 200 700, 400 600, 600 400 S 1000 100, 1300 -100" stroke="url(#gradient-line)" stroke-linecap="round" stroke-width="2"></path>
 <defs>
-<linearGradient gradientUnits="userSpaceOnUse" id="trajectory-gradient" x1="0" x2="1440" y1="800" y2="0">
+<linearGradient gradientUnits="userSpaceOnUse" id="gradient-line" x1="-100" x2="1300" y1="800" y2="-100">
 <stop offset="0%" stop-color="#3B0A6F" stop-opacity="0"></stop>
 <stop offset="50%" stop-color="#7A2FF7"></stop>
-<stop offset="100%" stop-color="#7A2FF7" stop-opacity="0"></stop>
+<stop offset="100%" stop-color="#8B3DFF" stop-opacity="0"></stop>
 </linearGradient>
 </defs>
 </svg>
 </div>
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16 md:py-24 relative z-10">
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-<div class="flex flex-col space-y-8 text-center lg:text-left">
-<div class="inline-flex items-center justify-center lg:justify-start">
-<span class="px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-semibold tracking-wide uppercase shadow-sm">
-                            Innovación &amp; Desarrollo
-                        </span>
+<div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-12 md:py-24 grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+<div class="space-y-8 text-center lg:text-left">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mx-auto lg:mx-0">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+<span class="text-xs font-semibold text-primary uppercase tracking-wider">Innovación Digital</span>
 </div>
-<h1 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-[1.15] text-slate-900 dark:text-white">
-                        Soluciones digitales <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-400">claras</span> para negocios que quieren crecer.
-                    </h1>
-<h2 class="text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
-                        Transformamos ideas complejas en experiencias web de alto impacto. Desde el diseño hasta la implementación, impulsamos tu marca con tecnología de vanguardia.
-                    </h2>
-<div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
-<a class="btn-glow inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-bold rounded-lg text-white bg-primary hover:bg-primary-dark transition-all duration-200 transform hover:scale-105" href="#">
-                            Solicitar asesoría
-                            <span class="material-icons-round ml-2 text-xl">rocket_launch</span>
+<h1 class="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl leading-tight text-slate-900 dark:text-white tracking-tight glow-text">
+                    Soluciones digitales <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent-purple">claras</span> para negocios que quieren crecer
+                </h1>
+<p class="text-lg sm:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                    Transformamos ideas complejas en experiencias web de alto impacto. Estrategia, diseño y desarrollo fusionados para impulsar tu presencia online al siguiente nivel.
+                </p>
+<div class="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start pt-4">
+<a class="primary-glow-btn w-full sm:w-auto px-8 py-4 rounded-lg bg-primary text-white font-semibold text-base flex items-center justify-center gap-2 group" href="#">
+                        Solicitar asesoría
+                        <span class="material-icons text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
 </a>
-<a class="inline-flex items-center justify-center px-8 py-4 border-2 border-slate-200 dark:border-white/20 hover:border-primary dark:hover:border-primary text-base font-medium rounded-lg text-slate-700 dark:text-white hover:text-primary dark:hover:text-primary transition-all duration-200 bg-transparent hover:bg-slate-50 dark:hover:bg-white/5" href="#">
-                            Ver servicios
-                        </a>
+<a class="w-full sm:w-auto px-8 py-4 rounded-lg border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-white font-medium hover:bg-slate-100 dark:hover:bg-white/5 transition-all flex items-center justify-center gap-2" href="#">
+                        Ver servicios
+                        <span class="material-icons text-sm opacity-70">grid_view</span>
+</a>
 </div>
-<div class="pt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 text-sm text-slate-400 dark:text-slate-500">
-<span>Potenciando empresas con:</span>
-<div class="flex gap-4 text-xl opacity-70">
-<span class="material-icons-round" title="Web">language</span>
-<span class="material-icons-round" title="Security">security</span>
-<span class="material-icons-round" title="Analytics">insights</span>
-<span class="material-icons-round" title="Mobile">smartphone</span>
+<div class="pt-8 flex items-center justify-center lg:justify-start gap-6 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+<p class="text-sm text-slate-500 dark:text-slate-500 font-medium mr-2">Tecnologías:</p>
+<div class="flex gap-4">
+<i class="devicon-react-original text-2xl text-slate-400 dark:text-slate-500"></i>
+<span class="font-bold text-slate-400 dark:text-slate-500 text-sm">Next.js</span>
+<span class="font-bold text-slate-400 dark:text-slate-500 text-sm">Tailwind</span>
+<span class="font-bold text-slate-400 dark:text-slate-500 text-sm">Figma</span>
 </div>
 </div>
 </div>
-<div class="relative flex justify-center lg:justify-end animate-float mt-8 lg:mt-0">
-<div class="relative group w-full max-w-md">
-<div class="absolute -inset-1 bg-gradient-to-r from-primary to-purple-600 rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-1000 group-hover:duration-200"></div>
-<div class="relative rounded-2xl overflow-hidden shadow-2xl border border-white/20 dark:border-white/10 bg-surface-dark">
-<div class="absolute inset-0 bg-gradient-to-t from-[#0B0B10]/80 via-transparent to-transparent z-10"></div>
-<img alt="RJS Lab Founder - Expert Web Developer" class="w-full h-auto object-cover transform transition duration-700 group-hover:scale-105 grayscale-[20%] group-hover:grayscale-0" src="public/images/founder.png"/>
-<div class="absolute bottom-6 left-6 z-20 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 shadow-lg flex items-center gap-3">
-<div class="bg-primary rounded-full p-2 flex items-center justify-center shadow-lg shadow-primary/50">
-<span class="material-icons-round text-white text-lg">code</span>
+<div class="relative lg:h-[600px] flex items-center justify-center perspective-1000">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-primary/20 dark:bg-primary/20 blur-[100px] rounded-full pointer-events-none"></div>
+<div class="relative w-full max-w-md animate-float">
+<div class="absolute -top-6 -right-6 z-20 bg-surface-dark/90 backdrop-blur-md border border-slate-700 p-4 rounded-xl shadow-2xl animate-bounce" style="animation-duration: 3s;">
+<div class="flex items-center gap-3">
+<div class="bg-green-500/20 p-2 rounded-lg">
+<span class="material-icons text-green-500">trending_up</span>
 </div>
 <div>
-<p class="text-xs text-slate-300 font-medium uppercase tracking-wider">Lead Developer</p>
-<p class="text-white font-bold text-sm">Expert Solutions</p>
+<p class="text-xs text-slate-400">Crecimiento</p>
+<p class="text-sm font-bold text-white">+145%</p>
 </div>
 </div>
 </div>
+<div class="absolute -bottom-8 -left-8 z-20 bg-surface-dark/90 backdrop-blur-md border border-slate-700 p-4 rounded-xl shadow-2xl animate-bounce" style="animation-duration: 4s;">
+<div class="flex items-center gap-3">
+<div class="bg-primary/20 p-2 rounded-lg">
+<span class="material-icons text-primary">code</span>
 </div>
-<div class="absolute -top-12 -right-12 text-primary/10 dark:text-white/5 animate-pulse">
-<svg fill="currentColor" height="120" viewBox="0 0 100 100" width="120">
-<pattern height="10" id="grid" patternUnits="userSpaceOnUse" width="10">
-<circle cx="1" cy="1" r="1"></circle>
-</pattern>
-<rect fill="url(#grid)" height="100" width="100"></rect>
-</svg>
-</div>
-</div>
+<div>
+<p class="text-xs text-slate-400">Código Limpio</p>
+<p class="text-sm font-bold text-white">Optimizado</p>
 </div>
 </div>
-<div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-background-light dark:from-background-dark to-transparent pointer-events-none z-20"></div>
-</section>
-<script>
-        // Simple Dark Mode Toggle Logic
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        const htmlElement = document.documentElement;
-        // Check local storage or system preference
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            htmlElement.classList.add('dark');
-        } else {
-            htmlElement.classList.remove('dark');
-        }
-        themeToggleBtn.addEventListener('click', () => {
-            if (htmlElement.classList.contains('dark')) {
-                htmlElement.classList.remove('dark');
-                localStorage.theme = 'light';
-            } else {
-                htmlElement.classList.add('dark');
-                localStorage.theme = 'dark';
-            }
-        });
-    </script>
-<footer class="bg-surface-light dark:bg-surface-dark border-t border-gray-200 dark:border-gray-800 py-8">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
-<p class="text-gray-500 dark:text-gray-400 text-sm">© 2024 RJS LAB. Todos los derechos reservados.</p>
-<div class="flex space-x-6">
-<a class="text-gray-400 hover:text-primary transition-colors" href="https://www.instagram.com/rjslabs/">
-<span class="sr-only">Instagram</span>
-<svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-<path clip-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.468 2.53c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" fill-rule="evenodd"></path>
-</svg>
+</div>
+<div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-700 group">
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 via-transparent to-transparent z-10"></div>
+<img alt="Fundador de RJS LAB sosteniendo tarjeta de presentación con el logo de la empresa" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNexGeCbZloL2-U70PnNxg0yaJKzA1ho-0kzyrGE_rDvktux19g6HiQVzNvudW34sJLnnSqD_h5Li6pToxmcFnQn873bSH_nf4rxPpCxj-XA3mZvx8iT1q9zTpSeIQc8ADLINsOPV8L3AiIQjXanP07eJ2Yp_HxpiWqKTf6elosxwhTuVJAhy4DtOKFmoUhSqslALx_Vz98tE4PKB2aiIKWwC4gMSJy8CCakDZwQTouFsT2fCppvXxfhBnzWDQkZUTyE_1pptcY1Rt"/>
+<div class="absolute bottom-0 left-0 w-full p-6 z-20">
+<div class="flex items-center gap-3 mb-1">
+<span class="inline-block w-2 h-2 rounded-full bg-green-500"></span>
+<span class="text-xs font-medium text-slate-300 uppercase tracking-wider">Disponible para proyectos</span>
+</div>
+<h3 class="text-white font-display font-bold text-xl">RJS LAB Team</h3>
+<p class="text-slate-300 text-sm">Expertos en Desarrollo Web</p>
+</div>
+</div>
+<div class="absolute -z-10 top-10 -right-10 w-24 h-24 border-2 border-primary/30 rounded-full"></div>
+<div class="absolute -z-10 bottom-20 -left-10 w-16 h-16 border-2 border-accent-purple/30 rounded-full"></div>
+</div>
+</div>
+</div>
+</main>
+<section id="servicios" class="flex-grow flex items-center justify-center py-16 px-4 md:px-8 overflow-hidden relative">
+<div class="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl -z-10 animate-pulse"></div>
+<div class="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary-glow/10 rounded-full blur-3xl -z-10"></div>
+<div class="max-w-7xl w-full flex flex-col gap-12">
+<div class="text-center space-y-4">
+<h2 class="text-sm font-bold uppercase tracking-widest text-secondary-glow mb-2">Lo que hacemos</h2>
+<h1 class="text-4xl md:text-5xl font-bold text-text-light-primary dark:text-text-dark-primary">
+                    Servicios <span class="text-primary dark:text-primary-glow">Principales</span>
+</h1>
+<p class="max-w-2xl mx-auto text-text-light-secondary dark:text-text-dark-secondary text-lg">
+                    Impulsamos tu negocio con soluciones digitales innovadoras, desde el desarrollo web hasta la transformación completa de tu marca.
+                </p>
+</div>
+<div class="relative w-full group">
+<button class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 p-3 rounded-full bg-card-light dark:bg-card-dark shadow-lg border border-gray-200 dark:border-primary/30 text-primary hover:scale-110 transition-transform hidden md:flex items-center justify-center hover:shadow-neon-purple">
+<span class="material-icons">chevron_left</span>
+</button>
+<div class="flex gap-6 overflow-x-auto pb-8 pt-4 px-4 scrollbar-hide snap-x snap-mandatory">
+<div class="min-w-[300px] md:min-w-[350px] flex-1 snap-center bg-card-light dark:bg-card-dark rounded-2xl p-8 border border-gray-200 dark:border-primary hover:border-secondary-glow dark:hover:border-secondary-glow transition-all duration-300 transform hover:-translate-y-2 shadow-xl hover:shadow-neon-purple flex flex-col gap-6 group/card relative overflow-hidden">
+<div class="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover/card:scale-150"></div>
+<div class="w-16 h-16 rounded-xl bg-gray-100 dark:bg-[#1A1A24] flex items-center justify-center border border-gray-200 dark:border-primary/50 shadow-inner">
+<span class="material-icons text-4xl text-primary dark:text-primary-glow">code</span>
+</div>
+<div>
+<h3 class="text-2xl font-bold text-text-light-primary dark:text-text-dark-primary mb-3">Desarrollo Web</h3>
+<p class="text-text-light-secondary dark:text-text-dark-secondary leading-relaxed">
+                                Sitios web a medida, rápidos y optimizados para SEO. Creamos experiencias digitales que convierten visitantes en clientes.
+                            </p>
+</div>
+<a class="mt-auto flex items-center text-sm font-bold text-primary dark:text-primary-glow hover:text-secondary-glow dark:hover:text-secondary-glow transition-colors gap-2" href="#">
+                            VER MÁS <span class="material-icons text-base">arrow_forward</span>
+</a>
+</div>
+<div class="min-w-[300px] md:min-w-[350px] flex-1 snap-center bg-card-light dark:bg-card-dark rounded-2xl p-8 border border-gray-200 dark:border-primary hover:border-secondary-glow dark:hover:border-secondary-glow transition-all duration-300 transform hover:-translate-y-2 shadow-xl hover:shadow-neon-purple flex flex-col gap-6 group/card relative overflow-hidden">
+<div class="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover/card:scale-150"></div>
+<div class="w-16 h-16 rounded-xl bg-gray-100 dark:bg-[#1A1A24] flex items-center justify-center border border-gray-200 dark:border-primary/50 shadow-inner">
+<span class="material-icons text-4xl text-primary dark:text-primary-glow">storefront</span>
+</div>
+<div>
+<h3 class="text-2xl font-bold text-text-light-primary dark:text-text-dark-primary mb-3">Catálogos y Comercio</h3>
+<p class="text-text-light-secondary dark:text-text-dark-secondary leading-relaxed">
+                                Plataformas de e-commerce robustas y catálogos interactivos diseñados para maximizar tus ventas online.
+                            </p>
+</div>
+<a class="mt-auto flex items-center text-sm font-bold text-primary dark:text-primary-glow hover:text-secondary-glow dark:hover:text-secondary-glow transition-colors gap-2" href="#">
+                            VER MÁS <span class="material-icons text-base">arrow_forward</span>
+</a>
+</div>
+<div class="min-w-[300px] md:min-w-[350px] flex-1 snap-center bg-card-light dark:bg-card-dark rounded-2xl p-8 border border-gray-200 dark:border-primary hover:border-secondary-glow dark:hover:border-secondary-glow transition-all duration-300 transform hover:-translate-y-2 shadow-xl hover:shadow-neon-purple flex flex-col gap-6 group/card relative overflow-hidden">
+<div class="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover/card:scale-150"></div>
+<div class="w-16 h-16 rounded-xl bg-gray-100 dark:bg-[#1A1A24] flex items-center justify-center border border-gray-200 dark:border-primary/50 shadow-inner">
+<span class="material-icons text-4xl text-primary dark:text-primary-glow">rocket_launch</span>
+</div>
+<div>
+<h3 class="text-2xl font-bold text-text-light-primary dark:text-text-dark-primary mb-3">Digitalización Comercial</h3>
+<p class="text-text-light-secondary dark:text-text-dark-secondary leading-relaxed">
+                                Transformamos procesos tradicionales en flujos de trabajo digitales eficientes para potenciar la productividad.
+                            </p>
+</div>
+<a class="mt-auto flex items-center text-sm font-bold text-primary dark:text-primary-glow hover:text-secondary-glow dark:hover:text-secondary-glow transition-colors gap-2" href="#">
+                            VER MÁS <span class="material-icons text-base">arrow_forward</span>
+</a>
+</div>
+<div class="min-w-[300px] md:min-w-[350px] flex-1 snap-center bg-card-light dark:bg-card-dark rounded-2xl p-8 border border-gray-200 dark:border-primary hover:border-secondary-glow dark:hover:border-secondary-glow transition-all duration-300 transform hover:-translate-y-2 shadow-xl hover:shadow-neon-purple flex flex-col gap-6 group/card relative overflow-hidden">
+<div class="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover/card:scale-150"></div>
+<div class="w-16 h-16 rounded-xl bg-gray-100 dark:bg-[#1A1A24] flex items-center justify-center border border-gray-200 dark:border-primary/50 shadow-inner">
+<span class="material-icons text-4xl text-primary dark:text-primary-glow">campaign</span>
+</div>
+<div>
+<h3 class="text-2xl font-bold text-text-light-primary dark:text-text-dark-primary mb-3">Publicidad Digital</h3>
+<p class="text-text-light-secondary dark:text-text-dark-secondary leading-relaxed">
+                                Estrategias de marketing digital, gestión de redes sociales y campañas de ads para alcanzar a tu público ideal.
+                            </p>
+</div>
+<a class="mt-auto flex items-center text-sm font-bold text-primary dark:text-primary-glow hover:text-secondary-glow dark:hover:text-secondary-glow transition-colors gap-2" href="#">
+                            VER MÁS <span class="material-icons text-base">arrow_forward</span>
 </a>
 </div>
 </div>
+<button class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 p-3 rounded-full bg-card-light dark:bg-card-dark shadow-lg border border-gray-200 dark:border-primary/30 text-primary hover:scale-110 transition-transform hidden md:flex items-center justify-center hover:shadow-neon-purple">
+<span class="material-icons">chevron_right</span>
+</button>
+</div>
+<div class="flex justify-center items-center gap-3 mt-4">
+<button class="w-10 h-1.5 rounded-full bg-secondary-glow shadow-[0_0_8px_#FF3DF2]"></button>
+<button class="w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-700 hover:bg-primary transition-colors"></button>
+<button class="w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-700 hover:bg-primary transition-colors"></button>
+<button class="w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-700 hover:bg-primary transition-colors"></button>
+</div>
+</div>
+</section>
+<section id="nosotros" class="min-h-screen flex items-center justify-center pt-20 pb-12 lg:pt-32">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+<div class="lg:col-span-5 relative group order-2 lg:order-1">
+<div class="absolute -inset-4 bg-primary/40 dark:bg-primary/30 rounded-full blur-3xl opacity-75 group-hover:opacity-100 transition duration-1000 animate-pulse"></div>
+<div class="relative overflow-hidden rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 transform transition duration-500 hover:scale-[1.02]">
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 via-transparent to-transparent z-10"></div>
+<img alt="RJS Lab Founder holding branding card" class="w-full h-auto object-cover grayscale-[20%] group-hover:grayscale-0 transition duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4kXw5nuMz6OjjTiR3-lIlI240GW83J4PSU11XY7JJsQpU11WA4_0Va12zflrW81Yz2P2hMFk7FTG4cqikyEBHN3f6PSGYRm4KT2koddS1i4FfVNtORZchrc-yYbChbzWWM1z2BkJG-BQw245X46O_6p_YxOhW7vEwfr_kYzpix4VeanepQJdApyjSiebeo6aW3NKT7Xf12Q1TxTbGYVTvO4yDQbpQBKJ6BP1Idk9zWy9NFaGGJ2CmPQYVj22SgFaoBpJhsPCugLUe"/>
+<div class="absolute bottom-6 left-6 z-20 bg-surface-light/90 dark:bg-surface-dark/90 backdrop-blur-sm border border-slate-200 dark:border-slate-700 px-4 py-2 rounded-lg shadow-lg flex items-center gap-2">
+<span class="material-icons-round text-primary text-xl">verified</span>
+<div>
+<p class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide">Fundador</p>
+<p class="text-sm font-bold text-slate-900 dark:text-white">RJS LAB</p>
+</div>
+</div>
+</div>
+<div class="absolute -bottom-8 -right-8 w-24 h-24 opacity-20 dark:opacity-40">
+<svg class="text-primary w-full h-full" fill="currentColor" viewBox="0 0 100 100">
+<pattern height="20" id="dots" patternUnits="userSpaceOnUse" width="20" x="0" y="0">
+<circle cx="2" cy="2" r="2"></circle>
+</pattern>
+<rect fill="url(#dots)" height="100" width="100"></rect>
+</svg>
+</div>
+</div>
+<div class="lg:col-span-7 space-y-8 order-1 lg:order-2">
+<div class="space-y-4">
+<div class="flex items-center space-x-2">
+<span class="h-px w-8 bg-primary"></span>
+<span class="text-primary font-bold tracking-widest text-sm uppercase">Identidad &amp; Visión</span>
+</div>
+<h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white leading-tight">
+                            Enfoque <span class="text-gradient">profesional</span> y práctico
+                        </h1>
+</div>
+<div class="relative py-4">
+<div aria-hidden="true" class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-slate-200 dark:border-slate-700"></div>
+</div>
+<div class="relative flex justify-start">
+<span class="bg-background-light dark:bg-background-dark pr-4 text-slate-400 dark:text-slate-500 flex items-center gap-3">
+<span class="text-xs uppercase tracking-wider font-semibold text-slate-400 dark:text-slate-500">Evolución Digital</span>
+<svg class="w-5 h-5 text-primary transform rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16 8l2 2 14-4a6 6 0 00-8.23-8.23g" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M12 12L20 4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<div class="h-px w-16 bg-gradient-to-r from-primary to-transparent"></div>
+</span>
+</div>
+</div>
+<div class="prose prose-lg text-slate-600 dark:text-slate-300">
+<p>
+                            En un mundo digital en constante cambio, la adaptabilidad es clave. En <strong class="text-slate-900 dark:text-white">RJS LAB</strong>, fusiono la creatividad técnica con estrategias de negocio sólidas.
+                        </p>
+<p class="mt-4">
+                            Con una amplia trayectoria en el ecosistema <span class="text-primary font-medium">WordPress</span> y desarrollo de soluciones a medida, ayudo a marcas y empresas a escalar su presencia online. No se trata solo de código, se trata de construir herramientas que funcionen para ti y tus clientes.
+                        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+<div class="flex items-start gap-4 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+<div class="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
+<span class="material-icons-round">code</span>
+</div>
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white">Desarrollo Custom</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Soluciones personalizadas y optimización de rendimiento.</p>
+</div>
+</div>
+<div class="flex items-start gap-4 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+<div class="p-2 rounded-lg bg-purple-100 dark:bg-purple-900/30 text-primary">
+<span class="material-icons-round">rocket_launch</span>
+</div>
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white">Digitalización</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Estrategias para llevar tu negocio al siguiente nivel.</p>
+</div>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-4 pt-4">
+<a class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-primary rounded-lg hover:bg-primary-dark focus:ring-4 focus:ring-purple-300 dark:focus:ring-purple-900 transition-all shadow-lg shadow-purple-500/25" href="#">
+                            Ver Portafolio
+                            <svg aria-hidden="true" class="w-4 h-4 ml-2 rtl:rotate-180" fill="none" viewBox="0 0 14 10" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 5h12m0 0L9 1m4 4L9 9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+<a class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-slate-900 dark:text-white bg-transparent border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 focus:ring-4 focus:ring-slate-100 dark:focus:ring-slate-700 transition-all" href="#">
+                            Leer más sobre mí
+                        </a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="contacto" class="flex-grow flex items-center justify-center p-4 lg:p-12">
+<div class="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+<div class="lg:col-span-5 flex flex-col justify-center h-full space-y-8 lg:sticky lg:top-12">
+<div>
+<img alt="RJS LAB Logo Abstract Rocket" class="w-20 h-20 object-contain drop-shadow-[0_0_15px_rgba(217,70,239,0.5)] rounded-2xl mb-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRNgJ0sf75SE6xlz7NYS3ghaMXMksI0OqzVhrADAFZJek7RFyLPThU5fGT7u2ThiPOrhjtnbe_TPntURQyhRF8jDxJYGwphAWQFFQztlcIiEc7l1M9DP-Nx_SOXxt6QFCKQRRnLEAdwXk4oZhs_1hrd3qBMR2LoFmdHK_6dLpd4EFD2Eck15lUTDFNlmm0kg3ZTAO_2V2mbCUSlgBb839vFF0zvJYWup-QNmqSTu2G7JlzrCdrgzOCOYyhfN_tHjv1v1yWIMPBzjq-"/>
+<h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 dark:text-white leading-tight">
+                        Llevamos tu negocio <br/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">al siguiente nivel.</span>
+</h1>
+</div>
+<p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                    Especialistas en desarrollo web y digitalización de negocios. Convierte tus ideas en una realidad digital escalable y moderna.
+                </p>
+<div class="bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-800 p-4 rounded-xl flex items-center gap-4 shadow-sm hover:shadow-md transition-shadow duration-300 w-fit">
+<div class="relative">
+<img alt="RJS LAB Founder Portrait" class="w-14 h-14 rounded-full object-cover border-2 border-primary" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKEOrbpKb3U0D8KTzsFbP2l0S5am2_nZkQAt24MVcxuEQrYFxW2gt6Djr5Bpdo7Uv-9_aklW367lCGO8rLg13eX30QywX7XW_SY-MsaFo6UTwMAlHkba2mWPtM6owoDF0TFWoxlDMouR6DKvzjOy-L1qSXLnELA1NZgw8-yhjDfgIGbFURSQ3eT7tn48OjA0FKJygdcX4wKOst9spffb5uwWn1ZRBUOyflFjOj-MSyeRb4bpv9q_tiwsijUxBmbq9CTdM7Wgca5ugK"/>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white dark:border-surface-dark rounded-full"></div>
+</div>
+<div>
+<p class="text-sm font-semibold text-gray-900 dark:text-white">Fundador RJS LAB</p>
+<p class="text-xs text-primary font-medium">Consultor Digital &amp; Desarrollador</p>
+</div>
+</div>
+<div class="hidden lg:block pt-8">
+<div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-500">
+<svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+<span>Garantía de calidad y soporte técnico continuo.</span>
+</div>
+</div>
+</div>
+<div class="lg:col-span-7 w-full">
+<div class="bg-white dark:bg-surface-dark rounded-2xl p-6 md:p-10 shadow-xl border border-gray-100 dark:border-gray-800 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-purple-500 to-indigo-500"></div>
+<div class="mb-8">
+<h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Solicitá una asesoría</h2>
+<p class="text-sm text-gray-500 dark:text-gray-400">Completa el formulario y nos pondremos en contacto contigo en menos de 24 horas.</p>
+</div>
+<form action="mailto:contacto@rjslab.com" method="post" enctype="text/plain" class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-sm font-medium text-gray-700 dark:text-gray-300" for="name">
+                                    Nombre completo <span class="text-primary">*</span>
+</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+<svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" fill-rule="evenodd"></path>
+</svg>
+</div>
+<input class="block w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-input-dark border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200" id="name" name="name" placeholder="Tu nombre" required="" type="text"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-medium text-gray-700 dark:text-gray-300" for="business">
+                                    Nombre del negocio
+                                </label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+<svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" fill-rule="evenodd"></path>
+</svg>
+</div>
+<input class="block w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-input-dark border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200" id="business" name="business" placeholder="Tu empresa" type="text"/>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-sm font-medium text-gray-700 dark:text-gray-300" for="phone">
+                                    Teléfono / WhatsApp <span class="text-primary">*</span>
+</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+<svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+</svg>
+</div>
+<input class="block w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-input-dark border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200" id="phone" name="phone" placeholder="+54 9 11..." required="" type="tel"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-medium text-gray-700 dark:text-gray-300" for="email">
+                                    Correo electrónico <span class="text-primary">*</span>
+</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+<svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+<path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+</svg>
+</div>
+<input class="block w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-input-dark border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200" id="email" name="email" placeholder="ejemplo@correo.com" required="" type="email"/>
+</div>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-medium text-gray-700 dark:text-gray-300" for="service">
+                                Tipo de servicio
+                            </label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+<svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M7 2a1 1 0 00-.707 1.707L7 4.414v3.758a1 1 0 01-.293.707l-4 4C.817 14.769 2.156 18 4.828 18h10.344c2.673 0 4.012-3.231 2.122-5.121l-4-4A1 1 0 0113 8.172V4.414l.707-.707A1 1 0 0013 2H7zm2 6.172V4h2v4.172a3 3 0 00.879 2.12l1.027 1.028a4 4 0 00-2.171.102l-.47.156a4 4 0 01-2.53 0l-.563-.187a1.993 1.993 0 00-.114-.035l1.063-1.063A3 3 0 009 8.172z" fill-rule="evenodd"></path>
+</svg>
+</div>
+<select class="block w-full pl-10 pr-10 py-3 bg-gray-50 dark:bg-input-dark border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 appearance-none" id="service" name="service">
+<option disabled="" selected="" value="">Selecciona una opción...</option>
+<option value="web-dev">Desarrollo Web</option>
+<option value="ecommerce">E-Commerce</option>
+<option value="app-dev">Aplicación Móvil</option>
+<option value="seo">SEO &amp; Marketing</option>
+<option value="other">Otro</option>
+</select>
+<div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+<svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-medium text-gray-700 dark:text-gray-300" for="message">
+                                Mensaje
+                            </label>
+<textarea class="block w-full p-4 bg-gray-50 dark:bg-input-dark border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 resize-none" id="message" name="message" placeholder="Cuéntanos brevemente sobre tu proyecto o idea..." rows="4"></textarea>
+</div>
+<div class="pt-2">
+<button class="w-full flex justify-center items-center gap-2 bg-gradient-to-r from-primary to-secondary hover:from-purple-500 hover:to-primary text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-[1.01] hover:shadow-[0_0_20px_rgba(217,70,239,0.4)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-offset-surface-dark" type="submit">
+<span>Enviar solicitud</span>
+<svg class="h-5 w-5 animate-pulse" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" fill-rule="evenodd"></path>
+</svg>
+<span class="text-xl">🚀</span>
+</button>
+</div>
+<p class="text-center text-xs text-gray-500 dark:text-gray-500 mt-4">
+                            Nos comprometemos con la privacidad de tus datos. 100% libre de spam.
+                        </p>
+</form>
+</div>
+</div>
+<div class="lg:hidden col-span-1 text-center pb-8">
+<div class="inline-flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 bg-white dark:bg-surface-dark px-4 py-2 rounded-full shadow-sm border border-gray-100 dark:border-gray-800">
+<svg class="h-5 w-5 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+<span>Garantía de calidad profesional.</span>
+</div>
+</div>
+</div>
+</section>
+<footer class="border-t border-slate-200 dark:border-slate-800 bg-background-light dark:bg-background-dark py-6">
+<div class="max-w-7xl mx-auto px-4 text-center text-sm text-slate-500 dark:text-slate-400">
+            © 2023 RJS LAB. Todos los derechos reservados.
+        </div>
 </footer>
+
 </body></html>
