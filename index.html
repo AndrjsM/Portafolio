@@ -304,6 +304,57 @@
         .carousel-card {
             flex: 0 0 100%;
         }
+        .form-field {
+            position: relative;
+        }
+        .form-error {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: calc(100% + 8px);
+            z-index: 10;
+            width: max-content;
+            max-width: 100%;
+            padding: 8px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #4C1D95;
+            background: #F5F3FF;
+            border: 1px solid rgba(139, 92, 246, 0.35);
+            border-radius: 10px;
+            box-shadow: 0 10px 24px rgba(76, 29, 149, 0.12);
+        }
+        .form-error::before {
+            content: "";
+            position: absolute;
+            top: -6px;
+            left: 18px;
+            width: 12px;
+            height: 12px;
+            background: #F5F3FF;
+            border-left: 1px solid rgba(139, 92, 246, 0.35);
+            border-top: 1px solid rgba(139, 92, 246, 0.35);
+            transform: rotate(45deg);
+        }
+        .dark .form-error {
+            color: #EDE9FE;
+            background: #1F1B2E;
+            border-color: rgba(168, 85, 247, 0.35);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+        }
+        .dark .form-error::before {
+            background: #1F1B2E;
+            border-color: rgba(168, 85, 247, 0.35);
+        }
+        .is-invalid + .form-error {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .is-invalid {
+            border-color: rgba(139, 92, 246, 0.6) !important;
+            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.18);
+        }
         @media (min-width: 768px) {
             .carousel-card {
                 flex: 0 0 calc((100% - 1.5rem) / 2);
@@ -865,6 +916,7 @@
 </svg>
 </div>
 <input class="block w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-input-dark border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200" id="name" name="name" placeholder="Ej: Juan Pérez" required="" type="text"/>
+<span class="form-error" data-error-for="name"></span>
 </div>
 </div>
 <div class="space-y-2">
@@ -878,6 +930,7 @@
 </svg>
 </div>
 <input class="block w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-input-dark border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200" id="business" name="business" placeholder="Ej: Cafetería en San José" required="" type="text"/>
+<span class="form-error" data-error-for="business"></span>
 </div>
 </div>
 </div>
@@ -893,6 +946,7 @@
 </svg>
 </div>
 <input class="block w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-input-dark border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200" id="phone" name="phone" placeholder="+506 8507 5310" required="" type="tel"/>
+<span class="form-error" data-error-for="phone"></span>
 </div>
 </div>
 <div class="space-y-2">
@@ -907,6 +961,7 @@
 </svg>
 </div>
 <input class="block w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-input-dark border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200" id="email" name="email" placeholder="cliente@correo.co.cr" required="" type="email"/>
+<span class="form-error" data-error-for="email"></span>
 </div>
 </div>
 </div>
@@ -924,6 +979,7 @@
 <option value="publicidad">Publicidad digital</option>
 <option value="mantenimiento">Mantenimiento mensual</option>
 </select>
+<span class="form-error" data-error-for="service"></span>
 <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
 <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
@@ -936,6 +992,7 @@
                                 Mensaje
                             </label>
 <textarea class="block w-full p-4 bg-gray-50 dark:bg-input-dark border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 resize-none" id="message" name="message" placeholder="Hola, soy de San José y necesito una cotización para..." rows="4" required=""></textarea>
+<span class="form-error" data-error-for="message"></span>
 </div>
 <div class="pt-2">
 <button class="w-full flex justify-center items-center gap-2 bg-gradient-to-r from-primary to-secondary hover:from-purple-500 hover:to-primary text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-[1.01] hover:shadow-[0_0_20px_rgba(217,70,239,0.4)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-offset-surface-dark" type="submit">
@@ -1282,16 +1339,45 @@
             ['message', 'Por favor, escribe tu mensaje.']
         ]);
 
+        const errorNodes = contactForm.querySelectorAll('[data-error-for]');
+
+        const showError = (field) => {
+            const key = field.name;
+            if (!key || !fieldMessages.has(key)) return;
+            const message = fieldMessages.get(key);
+            field.classList.add('is-invalid');
+            const errorNode = contactForm.querySelector(`[data-error-for="${key}"]`);
+            if (errorNode) {
+                errorNode.textContent = message;
+            }
+        };
+
+        const clearError = (field) => {
+            field.classList.remove('is-invalid');
+            const errorNode = contactForm.querySelector(`[data-error-for="${field.name}"]`);
+            if (errorNode) {
+                errorNode.textContent = '';
+            }
+        };
+
+        errorNodes.forEach((node) => {
+            node.textContent = '';
+        });
+
         contactForm.querySelectorAll('input, select, textarea').forEach((field) => {
             field.addEventListener('invalid', (event) => {
-                const key = event.target?.name;
-                if (key && fieldMessages.has(key)) {
-                    event.target.setCustomValidity(fieldMessages.get(key));
-                }
+                event.preventDefault();
+                showError(event.target);
             });
 
             field.addEventListener('input', (event) => {
-                event.target.setCustomValidity('');
+                clearError(event.target);
+            });
+
+            field.addEventListener('blur', (event) => {
+                if (!event.target.checkValidity()) {
+                    showError(event.target);
+                }
             });
         });
     }
