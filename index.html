@@ -877,7 +877,7 @@
 <path clip-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" fill-rule="evenodd"></path>
 </svg>
 </div>
-<input class="block w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-input-dark border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200" id="business" name="business" placeholder="Ej: Cafetería en San José" type="text"/>
+<input class="block w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-input-dark border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200" id="business" name="business" placeholder="Ej: Cafetería en San José" required="" type="text"/>
 </div>
 </div>
 </div>
@@ -915,7 +915,7 @@
                                 Tipo de servicio
                             </label>
 <div class="relative">
-<select class="block w-full pr-10 py-3 bg-gray-50 dark:bg-input-dark border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 appearance-none" id="service" name="service">
+<select class="block w-full pr-10 py-3 bg-gray-50 dark:bg-input-dark border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 appearance-none" id="service" name="service" required="">
 <option disabled="" selected="" value="">Selecciona una opción...</option>
 <option value="web">Desarrollo web</option>
 <option value="catalogo">Catálogo digital</option>
@@ -935,7 +935,7 @@
 <label class="text-sm font-medium text-gray-700 dark:text-gray-300" for="message">
                                 Mensaje
                             </label>
-<textarea class="block w-full p-4 bg-gray-50 dark:bg-input-dark border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 resize-none" id="message" name="message" placeholder="Hola, soy de San José y necesito una cotización para..." rows="4"></textarea>
+<textarea class="block w-full p-4 bg-gray-50 dark:bg-input-dark border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 resize-none" id="message" name="message" placeholder="Hola, soy de San José y necesito una cotización para..." rows="4" required=""></textarea>
 </div>
 <div class="pt-2">
 <button class="w-full flex justify-center items-center gap-2 bg-gradient-to-r from-primary to-secondary hover:from-purple-500 hover:to-primary text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-[1.01] hover:shadow-[0_0_20px_rgba(217,70,239,0.4)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-offset-surface-dark" type="submit">
@@ -1128,6 +1128,10 @@
     if (carousel && track && prevButton && nextButton) {
         let activeIndex = 0;
         const total = dots.length;
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let isTouching = false;
+        const swipeThreshold = 40;
 
         const updateDots = () => {
             dots.forEach((dot, index) => {
@@ -1213,6 +1217,34 @@
             window.__servicesCarouselInterval = setInterval(moveNext, 3500);
         };
 
+        const onTouchStart = (event) => {
+            const touch = event.touches?.[0];
+            if (!touch) return;
+            isTouching = true;
+            touchStartX = touch.clientX;
+            touchStartY = touch.clientY;
+            clearInterval(window.__servicesCarouselInterval);
+        };
+
+        const onTouchEnd = (event) => {
+            if (!isTouching) return;
+            isTouching = false;
+            const touch = event.changedTouches?.[0];
+            if (!touch) return;
+            const deltaX = touch.clientX - touchStartX;
+            const deltaY = touch.clientY - touchStartY;
+
+            if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > swipeThreshold) {
+                if (deltaX < 0) {
+                    moveNext();
+                } else {
+                    movePrev();
+                }
+            }
+
+            startAuto();
+        };
+
         prevButton.addEventListener('click', () => {
             movePrev();
             startAuto();
@@ -1232,6 +1264,8 @@
 
         carousel.addEventListener('mouseenter', () => clearInterval(window.__servicesCarouselInterval));
         carousel.addEventListener('mouseleave', startAuto);
+        carousel.addEventListener('touchstart', onTouchStart, { passive: true });
+        carousel.addEventListener('touchend', onTouchEnd, { passive: true });
 
         updateDots();
         startAuto();
