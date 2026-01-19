@@ -1271,6 +1271,31 @@
         startAuto();
     }
 
+    const contactForm = document.querySelector('form[action="https://formsubmit.co/info@rjs-lab.com"]');
+    if (contactForm) {
+        const fieldMessages = new Map([
+            ['name', 'Por favor, ingresa tu nombre completo.'],
+            ['business', 'Por favor, ingresa el nombre del negocio.'],
+            ['phone', 'Por favor, ingresa un número de teléfono válido.'],
+            ['email', 'Por favor, ingresa un correo electrónico válido.'],
+            ['service', 'Por favor, selecciona un servicio.'],
+            ['message', 'Por favor, escribe tu mensaje.']
+        ]);
+
+        contactForm.querySelectorAll('input, select, textarea').forEach((field) => {
+            field.addEventListener('invalid', (event) => {
+                const key = event.target?.name;
+                if (key && fieldMessages.has(key)) {
+                    event.target.setCustomValidity(fieldMessages.get(key));
+                }
+            });
+
+            field.addEventListener('input', (event) => {
+                event.target.setCustomValidity('');
+            });
+        });
+    }
+
 </script>
 
 </body></html>

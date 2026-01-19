@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gracias | RJS LAB</title>
+<meta name="description" content="Gracias por tu solicitud. En breve nos pondremos en contacto."/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="src/img/Logo_1.webp" rel="icon" type="image/webp"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<script>
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    primary: "#8B3DFF",
+                    "primary-dark": "#7e22ce",
+                    "primary-glow": "#A855F7",
+                    "secondary": "#a855f7",
+                    "secondary-glow": "#FF3DF2",
+                    "background-light": "#F8FAFC",
+                    "background-dark": "#0B0B10",
+                    "surface-light": "#FFFFFF",
+                    "surface-dark": "#13131A",
+                    "text-light-primary": "#111827",
+                    "text-light-secondary": "#4B5563",
+                    "text-dark-primary": "#FFFFFF",
+                    "text-dark-secondary": "#9CA3AF"
+                },
+                fontFamily: {
+                    display: ["Outfit", "sans-serif"],
+                    body: ["Inter", "sans-serif"]
+                }
+            }
+        }
+    };
+</script>
+<style>
+    body {
+        background: radial-gradient(circle at 70% 20%, rgba(99, 102, 241, 0.08), transparent 55%),
+        linear-gradient(180deg, #F8FAFC 0%, #F3F4FF 45%, #EEF2FF 100%);
+    }
+    .dark body {
+        background: radial-gradient(circle at 70% 20%, rgba(122, 47, 247, 0.08), transparent 55%),
+        linear-gradient(180deg, #0B0B10 0%, #141420 45%, #1A1A24 100%);
+    }
+</style>
+</head>
+<body class="font-body text-slate-800 dark:text-slate-200 min-h-screen flex items-center justify-center px-4 py-16">
+<main class="w-full max-w-2xl bg-white/90 dark:bg-surface-dark/90 backdrop-blur-md border border-slate-200 dark:border-slate-700 rounded-3xl p-8 md:p-12 shadow-2xl text-center">
+<div class="flex justify-center mb-6">
+<div class="w-16 h-16 rounded-2xl bg-primary/15 text-primary flex items-center justify-center">
+<span class="material-icons text-3xl">check_circle</span>
+</div>
+</div>
+<h1 class="font-display text-3xl md:text-4xl font-extrabold text-text-light-primary dark:text-text-dark-primary">¡Solicitud enviada!</h1>
+<p class="mt-4 text-base md:text-lg text-text-light-secondary dark:text-text-dark-secondary">
+        Gracias por contactarnos. Revisaremos tu solicitud y te responderemos en menos de 24 horas.
+    </p>
+<div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+<a class="px-6 py-3 rounded-full bg-primary text-white font-semibold hover:bg-primary-dark transition-colors" href="https://rjs-lab.com/">
+            Volver al inicio
+        </a>
+<a class="px-6 py-3 rounded-full border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 hover:border-primary hover:text-primary transition-colors" href="https://wa.me/50685075310?text=Hola%2C%20quiero%20dar%20seguimiento%20a%20mi%20solicitud." target="_blank" rel="noreferrer">
+            Escribir por WhatsApp
+        </a>
+</div>
+<p class="mt-8 text-xs text-slate-500 dark:text-slate-500">RJS LAB · Costa Rica</p>
+</main>
+<script>
+    const root = document.documentElement;
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme === 'light') {
+        root.classList.remove('dark');
+    } else {
+        root.classList.add('dark');
+    }
+</script>
+</body>
+</html>
