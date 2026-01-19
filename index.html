@@ -2,39 +2,105 @@
 <html lang="es"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>RJS LAB Home - Hero Section</title>
+<title>RJS LAB</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Outfit:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
-<script>
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              primary: "#8B3DFF", // A vibrant purple as the primary anchor
-              "primary-glow": "#A855F7",
-              "background-light": "#F8FAFC",
-              "background-dark": "#0B0B10",
-              "surface-dark": "#13131A",
-              "accent-purple": "#7A2FF7",
-              "deep-purple": "#3B0A6F",
-            },
-            fontFamily: {
-              display: ["Outfit", "sans-serif"],
-              body: ["Inter", "sans-serif"],
-            },
-            backgroundImage: {
-              'hero-gradient': 'radial-gradient(circle at 80% 20%, #3B0A6F 0%, #0B0B10 50%), radial-gradient(circle at 20% 80%, #1e1b4b 0%, #0B0B10 40%)',
-              'rocket-trail': 'linear-gradient(to right, transparent, #8B3DFF, transparent)',
-            },
-          },
-        },
-      };
-    </script>
-<style>@keyframes subtle-float {
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+        <script>
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        colors: {
+                            primary: "#8B3DFF", // A vibrant purple as the primary anchor
+                            "primary-dark": "#7e22ce",
+                            "primary-glow": "#A855F7",
+                            "secondary": "#a855f7",
+                            "secondary-glow": "#FF3DF2",
+                            "background-light": "#F8FAFC",
+                            "background-dark": "#0B0B10",
+                            "surface-light": "#FFFFFF",
+                            "surface-dark": "#13131A",
+                            "card-light": "#FFFFFF",
+                            "card-dark": "#23232F",
+                            "input-dark": "#18181b",
+                            "text-light-primary": "#111827",
+                            "text-light-secondary": "#4B5563",
+                            "text-dark-primary": "#FFFFFF",
+                            "text-dark-secondary": "#9CA3AF",
+                            "accent-purple": "#7A2FF7",
+                            "deep-purple": "#3B0A6F",
+                        },
+                        fontFamily: {
+                            display: ["Outfit", "sans-serif"],
+                            body: ["Inter", "sans-serif"],
+                        },
+                        backgroundImage: {
+                            'hero-gradient': 'radial-gradient(circle at 80% 20%, #3B0A6F 0%, #0B0B10 50%), radial-gradient(circle at 20% 80%, #1e1b4b 0%, #0B0B10 40%)',
+                            'rocket-trail': 'linear-gradient(to right, transparent, #8B3DFF, transparent)',
+                        },
+                        boxShadow: {
+                            'neon-purple': '0 0 10px rgba(122, 47, 247, 0.5), 0 0 20px rgba(122, 47, 247, 0.3)',
+                        },
+                    },
+                },
+            };
+        </script>
+<style>html { scroll-behavior: smooth; }
+        body.page-enter {
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity 300ms ease, transform 300ms ease;
+        }
+        body.page-enter.page-ready {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .section-reveal {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 450ms ease, transform 450ms ease;
+        }
+        .section-reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        #scroll-rocket {
+            position: fixed;
+            right: 20px;
+            bottom: 16px;
+            width: 48px;
+            height: 48px;
+            z-index: 40;
+            opacity: 0.9;
+            pointer-events: none;
+            transform: translate3d(0, 0, 0) rotate(-15deg);
+            transition: opacity 250ms ease;
+            color: #A855F7;
+        }
+        #scroll-rocket svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 10px rgba(139, 61, 255, 0.35));
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            body.page-enter,
+            body.page-enter.page-ready,
+            .section-reveal,
+            .section-reveal.is-visible {
+                transition: none;
+                transform: none;
+            }
+            #scroll-rocket {
+                display: none;
+            }
+        }
+        @keyframes subtle-float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
@@ -51,7 +117,8 @@
         .primary-glow-btn:hover {
             box-shadow: 0 0 25px rgba(122, 47, 247, 0.6);
             transform: translateY(-2px);
-        }.trajectory-path {
+        }
+        .trajectory-path {
             stroke-dasharray: 1000;
             stroke-dashoffset: 1000;
             animation: dash 5s linear forwards infinite;
@@ -62,9 +129,34 @@
                 stroke-dashoffset: 0;
             }
         }
+        .carousel-viewport {
+            overflow: hidden;
+            width: 100%;
+        }
+        .carousel-track {
+            display: flex;
+            gap: 1.5rem;
+            width: 100%;
+            will-change: transform;
+            align-items: stretch;
+            flex-wrap: nowrap;
+        }
+        .carousel-card {
+            flex: 0 0 100%;
+        }
+        @media (min-width: 768px) {
+            .carousel-card {
+                flex: 0 0 calc((100% - 1.5rem) / 2);
+            }
+        }
+        @media (min-width: 1024px) {
+            .carousel-card {
+                flex: 0 0 calc((100% - 3rem) / 3);
+            }
+        }
     </style>
 </head>
-<body class="font-body bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-200 antialiased selection:bg-primary selection:text-white min-h-screen flex flex-col transition-colors duration-300">
+<body class="font-body bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-200 antialiased selection:bg-primary selection:text-white min-h-screen flex flex-col transition-colors duration-300 page-enter">
 <nav class="fixed w-full z-50 top-0 left-0 border-b border-slate-200 dark:border-slate-800/50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 <div class="flex justify-between items-center h-20">
@@ -79,22 +171,44 @@
 <span class="font-display font-bold text-xl tracking-tight text-slate-900 dark:text-white group-hover:text-primary transition-colors">RJS LAB</span>
 </div>
 <div class="hidden md:flex items-center space-x-8">
-<a class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors" href="#">Inicio</a>
+<a class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors" href="#inicio">Inicio</a>
 <a class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors" href="#servicios">Servicios</a>
 <a class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors" href="#nosotros">Nosotros</a>
 <a href="#contacto" class="ml-4 px-5 py-2.5 rounded-full border border-slate-300 dark:border-slate-700 text-sm font-medium text-slate-700 dark:text-white hover:border-primary hover:text-primary dark:hover:border-primary dark:hover:text-primary transition-all duration-300">
                         Contactar
                     </a>
+<button aria-label="Cambiar tema" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-white/10 transition-colors text-slate-600 dark:text-slate-300" data-theme-toggle>
+<span class="material-icons text-xl">brightness_4</span>
+</button>
 </div>
 <div class="md:hidden flex items-center">
-<button class="text-slate-600 dark:text-slate-300 hover:text-primary focus:outline-none">
+<button aria-label="Cambiar tema" class="mr-2 p-2 rounded-full hover:bg-slate-100 dark:hover:bg-white/10 transition-colors text-slate-600 dark:text-slate-300" data-theme-toggle>
+<span class="material-icons text-3xl">brightness_4</span>
+</button>
+<button id="mobile-menu-button" aria-label="Abrir menú" aria-expanded="false" class="text-slate-600 dark:text-slate-300 hover:text-primary focus:outline-none">
 <span class="material-icons text-3xl">menu</span>
 </button>
 </div>
 </div>
 </div>
 </nav>
-<main class="flex-grow relative flex items-center justify-center pt-20 overflow-hidden">
+<div id="mobile-menu" class="md:hidden hidden border-b border-slate-200 dark:border-slate-800/50 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md pt-20 relative z-40">
+<div class="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-3">
+<a class="text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-primary transition-colors" href="#inicio">Inicio</a>
+<a class="text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-primary transition-colors" href="#servicios">Servicios</a>
+<a class="text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-primary transition-colors" href="#nosotros">Nosotros</a>
+<a class="text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-primary transition-colors" href="#contacto">Contacto</a>
+</div>
+</div>
+<div id="scroll-rocket" aria-hidden="true">
+<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2C9.5 4.5 8.5 7.5 8 10.5L4.5 14C3.7 14.8 3.7 16.1 4.5 16.9L7.1 19.5C7.9 20.3 9.2 20.3 10 19.5L13.5 16C16.5 15.5 19.5 14.5 22 12C20.5 7.5 16.5 3.5 12 2Z" stroke="currentColor" stroke-width="1.5"/>
+<circle cx="14" cy="10" r="2" fill="currentColor"/>
+<path d="M6 18L4 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+<path d="M8 20L10 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+</svg>
+</div>
+<main id="inicio" class="flex-grow relative flex items-center justify-center pt-20 pb-12 md:pb-20 overflow-hidden scroll-mt-24">
 <div class="absolute inset-0 bg-background-light dark:bg-background-dark z-0">
 <div class="absolute inset-0 hidden dark:block bg-hero-gradient opacity-60"></div>
 <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 dark:opacity-10 mix-blend-overlay pointer-events-none"></div>
@@ -134,13 +248,18 @@
                         <span class="material-icons text-sm opacity-70">grid_view</span>
 </a>
 </div>
-<div class="pt-8 flex items-center justify-center lg:justify-start gap-6 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+<div class="pt-8 flex flex-wrap items-center justify-center lg:justify-start gap-3 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
 <p class="text-sm text-slate-500 dark:text-slate-500 font-medium mr-2">Tecnologías:</p>
-<div class="flex gap-4">
-<i class="devicon-react-original text-2xl text-slate-400 dark:text-slate-500"></i>
-<span class="font-bold text-slate-400 dark:text-slate-500 text-sm">Next.js</span>
-<span class="font-bold text-slate-400 dark:text-slate-500 text-sm">Tailwind</span>
-<span class="font-bold text-slate-400 dark:text-slate-500 text-sm">Figma</span>
+<div class="flex flex-wrap gap-3">
+<span class="px-3 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-500 dark:text-slate-400">Next.js</span>
+<span class="px-3 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-500 dark:text-slate-400">Tailwind</span>
+<span class="px-3 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-500 dark:text-slate-400">Figma</span>
+<span class="px-3 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-500 dark:text-slate-400">Meta</span>
+<span class="px-3 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-500 dark:text-slate-400">Jules</span>
+<span class="px-3 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-500 dark:text-slate-400">Stick</span>
+<span class="px-3 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-500 dark:text-slate-400">Google</span>
+<span class="px-3 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-500 dark:text-slate-400">GitHub Pages</span>
+<span class="px-3 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-500 dark:text-slate-400">GitHub</span>
 </div>
 </div>
 </div>
@@ -172,7 +291,7 @@
 <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-700 group">
 <div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 via-transparent to-transparent z-10"></div>
 <img alt="Fundador de RJS LAB sosteniendo tarjeta de presentación con el logo de la empresa" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNexGeCbZloL2-U70PnNxg0yaJKzA1ho-0kzyrGE_rDvktux19g6HiQVzNvudW34sJLnnSqD_h5Li6pToxmcFnQn873bSH_nf4rxPpCxj-XA3mZvx8iT1q9zTpSeIQc8ADLINsOPV8L3AiIQjXanP07eJ2Yp_HxpiWqKTf6elosxwhTuVJAhy4DtOKFmoUhSqslALx_Vz98tE4PKB2aiIKWwC4gMSJy8CCakDZwQTouFsT2fCppvXxfhBnzWDQkZUTyE_1pptcY1Rt"/>
-<div class="absolute bottom-0 left-0 w-full p-6 z-20">
+<div class="absolute bottom-4 right-4 w-full p-6 z-20 flex flex-col items-end text-right">
 <div class="flex items-center gap-3 mb-1">
 <span class="inline-block w-2 h-2 rounded-full bg-green-500"></span>
 <span class="text-xs font-medium text-slate-300 uppercase tracking-wider">Disponible para proyectos</span>
@@ -187,7 +306,7 @@
 </div>
 </div>
 </main>
-<section id="servicios" class="flex-grow flex items-center justify-center py-16 px-4 md:px-8 overflow-hidden relative">
+<section id="servicios" class="flex-grow flex items-center justify-center py-20 md:py-28 px-4 md:px-8 overflow-hidden relative section-reveal scroll-mt-24" data-reveal>
 <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl -z-10 animate-pulse"></div>
 <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary-glow/10 rounded-full blur-3xl -z-10"></div>
 <div class="max-w-7xl w-full flex flex-col gap-12">
@@ -201,11 +320,12 @@
                 </p>
 </div>
 <div class="relative w-full group">
-<button class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 p-3 rounded-full bg-card-light dark:bg-card-dark shadow-lg border border-gray-200 dark:border-primary/30 text-primary hover:scale-110 transition-transform hidden md:flex items-center justify-center hover:shadow-neon-purple">
+<button aria-label="Anterior" class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-10 z-10 p-3 rounded-full bg-card-light dark:bg-card-dark shadow-lg border border-gray-200 dark:border-primary/30 text-primary hover:scale-110 transition-transform hidden md:flex items-center justify-center hover:shadow-neon-purple" data-carousel="prev">
 <span class="material-icons">chevron_left</span>
 </button>
-<div class="flex gap-6 overflow-x-auto pb-8 pt-4 px-4 scrollbar-hide snap-x snap-mandatory">
-<div class="min-w-[300px] md:min-w-[350px] flex-1 snap-center bg-card-light dark:bg-card-dark rounded-2xl p-8 border border-gray-200 dark:border-primary hover:border-secondary-glow dark:hover:border-secondary-glow transition-all duration-300 transform hover:-translate-y-2 shadow-xl hover:shadow-neon-purple flex flex-col gap-6 group/card relative overflow-hidden">
+<div class="carousel-viewport pb-8 pt-4 px-4" id="services-carousel">
+<div class="carousel-track">
+<div class="carousel-card bg-card-light dark:bg-card-dark rounded-2xl p-8 border border-gray-200 dark:border-primary hover:border-secondary-glow dark:hover:border-secondary-glow transition-all duration-300 transform hover:-translate-y-2 shadow-xl hover:shadow-neon-purple flex flex-col gap-6 group/card relative overflow-hidden">
 <div class="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover/card:scale-150"></div>
 <div class="w-16 h-16 rounded-xl bg-gray-100 dark:bg-[#1A1A24] flex items-center justify-center border border-gray-200 dark:border-primary/50 shadow-inner">
 <span class="material-icons text-4xl text-primary dark:text-primary-glow">code</span>
@@ -220,7 +340,7 @@
                             VER MÁS <span class="material-icons text-base">arrow_forward</span>
 </a>
 </div>
-<div class="min-w-[300px] md:min-w-[350px] flex-1 snap-center bg-card-light dark:bg-card-dark rounded-2xl p-8 border border-gray-200 dark:border-primary hover:border-secondary-glow dark:hover:border-secondary-glow transition-all duration-300 transform hover:-translate-y-2 shadow-xl hover:shadow-neon-purple flex flex-col gap-6 group/card relative overflow-hidden">
+<div class="carousel-card bg-card-light dark:bg-card-dark rounded-2xl p-8 border border-gray-200 dark:border-primary hover:border-secondary-glow dark:hover:border-secondary-glow transition-all duration-300 transform hover:-translate-y-2 shadow-xl hover:shadow-neon-purple flex flex-col gap-6 group/card relative overflow-hidden">
 <div class="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover/card:scale-150"></div>
 <div class="w-16 h-16 rounded-xl bg-gray-100 dark:bg-[#1A1A24] flex items-center justify-center border border-gray-200 dark:border-primary/50 shadow-inner">
 <span class="material-icons text-4xl text-primary dark:text-primary-glow">storefront</span>
@@ -235,7 +355,7 @@
                             VER MÁS <span class="material-icons text-base">arrow_forward</span>
 </a>
 </div>
-<div class="min-w-[300px] md:min-w-[350px] flex-1 snap-center bg-card-light dark:bg-card-dark rounded-2xl p-8 border border-gray-200 dark:border-primary hover:border-secondary-glow dark:hover:border-secondary-glow transition-all duration-300 transform hover:-translate-y-2 shadow-xl hover:shadow-neon-purple flex flex-col gap-6 group/card relative overflow-hidden">
+<div class="carousel-card bg-card-light dark:bg-card-dark rounded-2xl p-8 border border-gray-200 dark:border-primary hover:border-secondary-glow dark:hover:border-secondary-glow transition-all duration-300 transform hover:-translate-y-2 shadow-xl hover:shadow-neon-purple flex flex-col gap-6 group/card relative overflow-hidden">
 <div class="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover/card:scale-150"></div>
 <div class="w-16 h-16 rounded-xl bg-gray-100 dark:bg-[#1A1A24] flex items-center justify-center border border-gray-200 dark:border-primary/50 shadow-inner">
 <span class="material-icons text-4xl text-primary dark:text-primary-glow">rocket_launch</span>
@@ -250,7 +370,7 @@
                             VER MÁS <span class="material-icons text-base">arrow_forward</span>
 </a>
 </div>
-<div class="min-w-[300px] md:min-w-[350px] flex-1 snap-center bg-card-light dark:bg-card-dark rounded-2xl p-8 border border-gray-200 dark:border-primary hover:border-secondary-glow dark:hover:border-secondary-glow transition-all duration-300 transform hover:-translate-y-2 shadow-xl hover:shadow-neon-purple flex flex-col gap-6 group/card relative overflow-hidden">
+<div class="carousel-card bg-card-light dark:bg-card-dark rounded-2xl p-8 border border-gray-200 dark:border-primary hover:border-secondary-glow dark:hover:border-secondary-glow transition-all duration-300 transform hover:-translate-y-2 shadow-xl hover:shadow-neon-purple flex flex-col gap-6 group/card relative overflow-hidden">
 <div class="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover/card:scale-150"></div>
 <div class="w-16 h-16 rounded-xl bg-gray-100 dark:bg-[#1A1A24] flex items-center justify-center border border-gray-200 dark:border-primary/50 shadow-inner">
 <span class="material-icons text-4xl text-primary dark:text-primary-glow">campaign</span>
@@ -266,19 +386,20 @@
 </a>
 </div>
 </div>
-<button class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 p-3 rounded-full bg-card-light dark:bg-card-dark shadow-lg border border-gray-200 dark:border-primary/30 text-primary hover:scale-110 transition-transform hidden md:flex items-center justify-center hover:shadow-neon-purple">
+</div>
+<button aria-label="Siguiente" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-10 z-10 p-3 rounded-full bg-card-light dark:bg-card-dark shadow-lg border border-gray-200 dark:border-primary/30 text-primary hover:scale-110 transition-transform hidden md:flex items-center justify-center hover:shadow-neon-purple" data-carousel="next">
 <span class="material-icons">chevron_right</span>
 </button>
 </div>
-<div class="flex justify-center items-center gap-3 mt-4">
-<button class="w-10 h-1.5 rounded-full bg-secondary-glow shadow-[0_0_8px_#FF3DF2]"></button>
-<button class="w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-700 hover:bg-primary transition-colors"></button>
-<button class="w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-700 hover:bg-primary transition-colors"></button>
-<button class="w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-700 hover:bg-primary transition-colors"></button>
+<div class="flex justify-center items-center gap-3 mt-4" id="services-dots">
+<button class="w-10 h-1.5 rounded-full bg-secondary-glow shadow-[0_0_8px_#FF3DF2] transition-all" data-carousel-dot="0" aria-label="Ir al servicio 1"></button>
+<button class="w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-700 hover:bg-primary transition-colors" data-carousel-dot="1" aria-label="Ir al servicio 2"></button>
+<button class="w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-700 hover:bg-primary transition-colors" data-carousel-dot="2" aria-label="Ir al servicio 3"></button>
+<button class="w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-700 hover:bg-primary transition-colors" data-carousel-dot="3" aria-label="Ir al servicio 4"></button>
 </div>
 </div>
 </section>
-<section id="nosotros" class="min-h-screen flex items-center justify-center pt-20 pb-12 lg:pt-32">
+<section id="nosotros" class="min-h-screen flex items-center justify-center pt-24 pb-16 md:pt-28 md:pb-20 lg:pt-32 section-reveal scroll-mt-24" data-reveal>
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
 <div class="lg:col-span-5 relative group order-2 lg:order-1">
@@ -321,7 +442,7 @@
 <span class="bg-background-light dark:bg-background-dark pr-4 text-slate-400 dark:text-slate-500 flex items-center gap-3">
 <span class="text-xs uppercase tracking-wider font-semibold text-slate-400 dark:text-slate-500">Evolución Digital</span>
 <svg class="w-5 h-5 text-primary transform rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16 8l2 2 14-4a6 6 0 00-8.23-8.23g" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
 <path d="M12 12L20 4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
 </svg>
 <div class="h-px w-16 bg-gradient-to-r from-primary to-transparent"></div>
@@ -339,7 +460,7 @@
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
 <div class="flex items-start gap-4 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
 <div class="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
-<span class="material-icons-round">code</span>
+<span class="material-icons">code</span>
 </div>
 <div>
 <h3 class="font-bold text-slate-900 dark:text-white">Desarrollo Custom</h3>
@@ -348,7 +469,7 @@
 </div>
 <div class="flex items-start gap-4 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
 <div class="p-2 rounded-lg bg-purple-100 dark:bg-purple-900/30 text-primary">
-<span class="material-icons-round">rocket_launch</span>
+<span class="material-icons">rocket_launch</span>
 </div>
 <div>
 <h3 class="font-bold text-slate-900 dark:text-white">Digitalización</h3>
@@ -371,7 +492,7 @@
 </div>
 </div>
 </section>
-<section id="contacto" class="flex-grow flex items-center justify-center p-4 lg:p-12">
+<section id="contacto" class="flex-grow flex items-center justify-center pt-20 pb-16 md:pt-24 md:pb-20 px-4 lg:px-12 section-reveal scroll-mt-24" data-reveal>
 <div class="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
 <div class="lg:col-span-5 flex flex-col justify-center h-full space-y-8 lg:sticky lg:top-12">
 <div>
@@ -410,7 +531,11 @@
 <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Solicitá una asesoría</h2>
 <p class="text-sm text-gray-500 dark:text-gray-400">Completa el formulario y nos pondremos en contacto contigo en menos de 24 horas.</p>
 </div>
-<form action="mailto:contacto@rjslab.com" method="post" enctype="text/plain" class="space-y-6">
+<form action="https://formsubmit.co/info@rjs-lab.com" method="POST" class="space-y-6">
+<input type="hidden" name="_subject" value="Nueva solicitud de contacto"/>
+<input type="hidden" name="_template" value="table"/>
+<input type="hidden" name="_captcha" value="false"/>
+<input type="hidden" name="_next" value="https://rjs-lab.com/gracias.html"/>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 <div class="space-y-2">
 <label class="text-sm font-medium text-gray-700 dark:text-gray-300" for="name">
@@ -422,7 +547,7 @@
 <path clip-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" fill-rule="evenodd"></path>
 </svg>
 </div>
-<input class="block w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-input-dark border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200" id="name" name="name" placeholder="Tu nombre" required="" type="text"/>
+<input class="block w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-input-dark border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200" id="name" name="name" placeholder="Ej: Juan Pérez" required="" type="text"/>
 </div>
 </div>
 <div class="space-y-2">
@@ -435,7 +560,7 @@
 <path clip-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" fill-rule="evenodd"></path>
 </svg>
 </div>
-<input class="block w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-input-dark border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200" id="business" name="business" placeholder="Tu empresa" type="text"/>
+<input class="block w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-input-dark border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200" id="business" name="business" placeholder="Ej: Cafetería en San José" type="text"/>
 </div>
 </div>
 </div>
@@ -450,7 +575,7 @@
 <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
 </svg>
 </div>
-<input class="block w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-input-dark border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200" id="phone" name="phone" placeholder="+54 9 11..." required="" type="tel"/>
+<input class="block w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-input-dark border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200" id="phone" name="phone" placeholder="+506 8507 5310" required="" type="tel"/>
 </div>
 </div>
 <div class="space-y-2">
@@ -464,7 +589,7 @@
 <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
 </svg>
 </div>
-<input class="block w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-input-dark border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200" id="email" name="email" placeholder="ejemplo@correo.com" required="" type="email"/>
+<input class="block w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-input-dark border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200" id="email" name="email" placeholder="cliente@correo.co.cr" required="" type="email"/>
 </div>
 </div>
 </div>
@@ -497,7 +622,7 @@
 <label class="text-sm font-medium text-gray-700 dark:text-gray-300" for="message">
                                 Mensaje
                             </label>
-<textarea class="block w-full p-4 bg-gray-50 dark:bg-input-dark border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 resize-none" id="message" name="message" placeholder="Cuéntanos brevemente sobre tu proyecto o idea..." rows="4"></textarea>
+<textarea class="block w-full p-4 bg-gray-50 dark:bg-input-dark border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 resize-none" id="message" name="message" placeholder="Hola, soy de San José y necesito una cotización para..." rows="4"></textarea>
 </div>
 <div class="pt-2">
 <button class="w-full flex justify-center items-center gap-2 bg-gradient-to-r from-primary to-secondary hover:from-purple-500 hover:to-primary text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-[1.01] hover:shadow-[0_0_20px_rgba(217,70,239,0.4)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-offset-surface-dark" type="submit">
@@ -524,10 +649,253 @@
 </div>
 </div>
 </section>
-<footer class="border-t border-slate-200 dark:border-slate-800 bg-background-light dark:bg-background-dark py-6">
-<div class="max-w-7xl mx-auto px-4 text-center text-sm text-slate-500 dark:text-slate-400">
-            © 2023 RJS LAB. Todos los derechos reservados.
-        </div>
+<footer class="border-t border-slate-200 dark:border-slate-800 bg-background-light dark:bg-background-dark">
+<div class="max-w-7xl mx-auto px-4 py-12 md:py-16">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+<div class="space-y-4">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">RJS LAB</h3>
+<p class="text-sm text-slate-600 dark:text-slate-400">Soluciones digitales prácticas y profesionales.</p>
+<p class="text-sm text-slate-500 dark:text-slate-400">Desarrollo web · Digitalización comercial · Publicidad digital · Soporte</p>
+</div>
+<div class="space-y-4">
+<h4 class="text-sm font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400">Servicios</h4>
+<ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+<li>Desarrollo web en WordPress</li>
+<li>Catálogos digitales</li>
+<li>Tiendas en línea</li>
+<li>WhatsApp Business</li>
+<li>Campañas publicitarias</li>
+<li>Mantenimiento y soporte</li>
+</ul>
+</div>
+<div class="space-y-4">
+<h4 class="text-sm font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400">Contacto</h4>
+<ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+<li>📍 Costa Rica</li>
+<li>📧 info@rjs-lab.com</li>
+<li>📱 <a class="hover:text-primary transition-colors" href="https://wa.me/50685075310?text=Hola%2C%20me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20servicios." target="_blank" rel="noreferrer">WhatsApp</a></li>
+<li>Atención bajo cita previa.</li>
+</ul>
+</div>
+<div class="space-y-4">
+<h4 class="text-sm font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400">Confianza</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400">Trabajo con criterios técnicos, procesos claros y enfoque en resultados reales. No ofrezco soluciones genéricas ni promesas exageradas.</p>
+</div>
+</div>
+</div>
+<div class="border-t border-slate-200 dark:border-slate-800">
+<div class="max-w-7xl mx-auto px-4 py-6 text-center text-sm text-slate-500 dark:text-slate-400">
+© 2026 RJS LAB. Todos los derechos reservados. Desarrollo web y soluciones digitales.
+</div>
+</div>
 </footer>
+
+<script>
+    const root = document.documentElement;
+    const storedTheme = localStorage.getItem('theme');
+    const page = document.body;
+
+    if (storedTheme === 'light') {
+        root.classList.remove('dark');
+    } else {
+        root.classList.add('dark');
+    }
+
+    const toggleTheme = () => {
+        root.classList.toggle('dark');
+        localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+    };
+
+    document.querySelectorAll('[data-theme-toggle]').forEach((btn) => {
+        btn.addEventListener('click', toggleTheme);
+    });
+
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.toggle('hidden') === false;
+            mobileMenuButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+        mobileMenu.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenuButton.setAttribute('aria-expanded', 'false');
+            });
+        });
+    }
+
+    requestAnimationFrame(() => {
+        page.classList.add('page-ready');
+    });
+
+    const revealItems = document.querySelectorAll('[data-reveal]');
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        revealItems.forEach((item) => observer.observe(item));
+    } else {
+        revealItems.forEach((item) => item.classList.add('is-visible'));
+    }
+
+    const rocket = document.getElementById('scroll-rocket');
+    if (rocket && window.gsap && window.ScrollTrigger) {
+        gsap.registerPlugin(ScrollTrigger);
+        const sections = [
+            document.querySelector('main'),
+            document.querySelector('#servicios'),
+            document.querySelector('#nosotros'),
+            document.querySelector('#contacto')
+        ].filter(Boolean);
+
+        sections.forEach((section, index) => {
+            gsap.to(rocket, {
+                y: () => -(index * 80),
+                rotation: () => 5 + index * 4,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top center',
+                    end: 'bottom center',
+                    scrub: true
+                }
+            });
+        });
+
+        gsap.to(rocket, {
+            opacity: 1,
+            scrollTrigger: {
+                trigger: 'body',
+                start: 'top+=120 top',
+                end: 'bottom bottom',
+                scrub: true
+            }
+        });
+    }
+
+    const carousel = document.getElementById('services-carousel');
+    const track = carousel?.querySelector('.carousel-track');
+    const prevButton = document.querySelector('[data-carousel="prev"]');
+    const nextButton = document.querySelector('[data-carousel="next"]');
+    const dots = Array.from(document.querySelectorAll('[data-carousel-dot]'));
+
+    if (carousel && track && prevButton && nextButton) {
+        let activeIndex = 0;
+        const total = dots.length;
+
+        const updateDots = () => {
+            dots.forEach((dot, index) => {
+                const isActive = index === activeIndex;
+                dot.classList.toggle('w-10', isActive);
+                dot.classList.toggle('h-1.5', isActive);
+                dot.classList.toggle('bg-secondary-glow', isActive);
+                dot.classList.toggle('shadow-[0_0_8px_#FF3DF2]', isActive);
+
+                dot.classList.toggle('w-3', !isActive);
+                dot.classList.toggle('h-3', !isActive);
+                dot.classList.toggle('bg-gray-300', !isActive);
+                dot.classList.toggle('dark:bg-gray-700', !isActive);
+            });
+        };
+
+        const getGap = () => {
+            const gapValue = getComputedStyle(track).gap || '0px';
+            return Number.parseFloat(gapValue) || 0;
+        };
+
+        const moveNext = () => {
+            if (track.dataset.animating === 'true') return;
+            track.dataset.animating = 'true';
+
+            const firstCard = track.firstElementChild;
+            if (!firstCard) return;
+
+            const cardWidth = firstCard.getBoundingClientRect().width;
+            const distance = cardWidth + getGap();
+
+            track.style.transition = 'transform 450ms ease';
+            track.style.transform = `translateX(-${distance}px)`;
+
+            track.addEventListener('transitionend', () => {
+                track.style.transition = 'none';
+                track.style.transform = 'translateX(0)';
+                track.appendChild(firstCard);
+                track.dataset.animating = 'false';
+                activeIndex = (activeIndex + 1) % total;
+                updateDots();
+            }, { once: true });
+        };
+
+        const movePrev = () => {
+            if (track.dataset.animating === 'true') return;
+            track.dataset.animating = 'true';
+
+            const lastCard = track.lastElementChild;
+            if (!lastCard) return;
+
+            const cardWidth = lastCard.getBoundingClientRect().width;
+            const distance = cardWidth + getGap();
+
+            track.style.transition = 'none';
+            track.style.transform = `translateX(-${distance}px)`;
+            track.insertBefore(lastCard, track.firstElementChild);
+            track.offsetHeight;
+
+            track.style.transition = 'transform 450ms ease';
+            track.style.transform = 'translateX(0)';
+
+            track.addEventListener('transitionend', () => {
+                track.dataset.animating = 'false';
+                activeIndex = (activeIndex - 1 + total) % total;
+                updateDots();
+            }, { once: true });
+        };
+
+        const moveTo = (targetIndex) => {
+            if (track.dataset.animating === 'true' || targetIndex === activeIndex) return;
+            const steps = (targetIndex - activeIndex + total) % total;
+            const runStep = (remaining) => {
+                if (remaining <= 0) return;
+                moveNext();
+                setTimeout(() => runStep(remaining - 1), 480);
+            };
+            runStep(steps);
+        };
+
+        const startAuto = () => {
+            clearInterval(window.__servicesCarouselInterval);
+            window.__servicesCarouselInterval = setInterval(moveNext, 3500);
+        };
+
+        prevButton.addEventListener('click', () => {
+            movePrev();
+            startAuto();
+        });
+        nextButton.addEventListener('click', () => {
+            moveNext();
+            startAuto();
+        });
+
+        dots.forEach((dot) => {
+            dot.addEventListener('click', () => {
+                const target = Number.parseInt(dot.dataset.carouselDot || '0', 10);
+                moveTo(target);
+                startAuto();
+            });
+        });
+
+        carousel.addEventListener('mouseenter', () => clearInterval(window.__servicesCarouselInterval));
+        carousel.addEventListener('mouseleave', startAuto);
+
+        updateDots();
+        startAuto();
+    }
+</script>
 
 </body></html>
