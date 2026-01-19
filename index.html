@@ -2,7 +2,8 @@
 <html lang="es"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>RJS LAB</title>
+<title>RJS LAB | Desarrollo Web y Soluciones Digitales</title>
+<meta name="description" content="Desarrollo web en WordPress, catálogos digitales, WhatsApp Business y soporte para negocios en Costa Rica."/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Outfit:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
@@ -52,6 +53,134 @@
             };
         </script>
 <style>html { scroll-behavior: smooth; }
+        body {
+                position: relative;
+            background: radial-gradient(circle at 70% 20%, rgba(99, 102, 241, 0.08), transparent 55%),
+            linear-gradient(180deg, #F8FAFC 0%, #F3F4FF 45%, #EEF2FF 100%);
+        }
+        .dark body {
+            background: radial-gradient(circle at 70% 20%, rgba(122, 47, 247, 0.08), transparent 55%),
+            linear-gradient(180deg, #0B0B10 0%, #141420 45%, #1A1A24 100%);
+        }
+        main,
+        section,
+        footer {
+            position: relative;
+            z-index: 2;
+        }
+        #storyline {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+        #story-rocket {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: url('src/img/Logo_1.webp') center/contain no-repeat;
+            opacity: 0.8;
+            transform: translate3d(0, 0, 0);
+        }
+        .bg-halo {
+            position: fixed;
+            width: 460px;
+            height: 460px;
+            border-radius: 9999px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.18) 0%, rgba(99, 102, 241, 0.1) 35%, rgba(99, 102, 241, 0) 70%);
+            filter: blur(6px);
+            opacity: 0.75;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .dark .bg-halo {
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.22) 0%, rgba(168, 85, 247, 0.12) 35%, rgba(168, 85, 247, 0) 70%);
+        }
+        .bg-halo.halo-1 {
+            top: -120px;
+            left: -80px;
+        }
+        .bg-halo.halo-2 {
+            top: 20vh;
+            right: -140px;
+        }
+        .bg-halo.halo-3 {
+            bottom: -140px;
+            left: 20vw;
+        }
+        .bg-point {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            border-radius: 9999px;
+            background: rgba(99, 102, 241, 0.7);
+            box-shadow: 0 0 12px rgba(99, 102, 241, 0.45);
+            opacity: 0.8;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .dark .bg-point {
+            background: rgba(168, 85, 247, 0.8);
+            box-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
+        }
+        .bg-point.point-1 { top: 14vh; left: 12vw; }
+        .bg-point.point-2 { top: 26vh; right: 18vw; }
+        .bg-point.point-3 { top: 48vh; left: 42vw; }
+        .bg-point.point-4 { top: 62vh; right: 8vw; }
+        .bg-point.point-5 { bottom: 18vh; left: 8vw; }
+        .bg-point.point-6 { bottom: 26vh; right: 32vw; }
+        .hero-halo {
+            position: absolute;
+            width: 460px;
+            height: 460px;
+            border-radius: 9999px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.22) 0%, rgba(99, 102, 241, 0.12) 35%, rgba(99, 102, 241, 0) 70%);
+            filter: blur(8px);
+            opacity: 0.85;
+            top: -40px;
+            right: -80px;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .dark .hero-halo {
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.28) 0%, rgba(168, 85, 247, 0.14) 35%, rgba(168, 85, 247, 0) 70%);
+        }
+        .hero-double-ring {
+            position: absolute;
+            width: 520px;
+            height: 520px;
+            top: 30px;
+            right: -40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.7;
+        }
+        .hero-double-ring svg {
+            width: 100%;
+            height: 100%;
+        }
+        .hero-double-ring .ring-outer {
+            stroke: rgba(99, 102, 241, 0.35);
+        }
+        .hero-double-ring .ring-inner {
+            stroke: rgba(99, 102, 241, 0.22);
+        }
+        .dark .hero-double-ring .ring-outer {
+            stroke: rgba(168, 85, 247, 0.4);
+        }
+        .dark .hero-double-ring .ring-inner {
+            stroke: rgba(168, 85, 247, 0.22);
+        }
+        .tech-chip {
+            border-color: #CBD5E1;
+            color: #374151;
+            background: rgba(255, 255, 255, 0.75);
+        }
+        .dark .tech-chip {
+            border-color: #334155;
+            color: #9CA3AF;
+            background: transparent;
+        }
         body.page-enter {
             opacity: 0;
             transform: translateY(8px);
@@ -100,6 +229,10 @@
             #scroll-rocket {
                 display: none;
             }
+            #story-rocket {
+                animation: none;
+                opacity: 0.4;
+            }
         }
         @keyframes subtle-float {
             0%, 100% { transform: translateY(0); }
@@ -130,6 +263,32 @@
                 stroke-dashoffset: 0;
             }
         }
+        @keyframes slow-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes slow-spin-reverse {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
+        .animate-slow-spin {
+            animation: slow-spin 42s linear infinite;
+        }
+        .animate-slow-spin-reverse {
+            animation: slow-spin-reverse 58s linear infinite;
+        }
+        .hero-path {
+            stroke-width: 2;
+            stroke-dasharray: 8 12;
+            stroke-dashoffset: 0;
+            opacity: 0.7;
+            animation: hero-dash 18s linear infinite;
+        }
+        @keyframes hero-dash {
+            to {
+                stroke-dashoffset: -400;
+            }
+        }
         .carousel-viewport {
             overflow: hidden;
             width: 100%;
@@ -157,7 +316,26 @@
         }
     </style>
 </head>
-<body class="font-body bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-200 antialiased selection:bg-primary selection:text-white min-h-screen flex flex-col transition-colors duration-300 page-enter">
+<body class="font-body bg-transparent text-slate-800 dark:text-slate-200 antialiased selection:bg-primary selection:text-white min-h-screen flex flex-col transition-colors duration-300 page-enter">
+<div id="storyline" aria-hidden="true">
+<svg class="absolute inset-0 w-full h-full opacity-35" fill="none" viewBox="0 0 1440 800" xmlns="http://www.w3.org/2000/svg">
+<path d="M-120 760 C 120 700, 320 560, 520 420 S 980 140, 1460 -40" stroke="url(#story-gradient)" stroke-linecap="round" stroke-width="2"></path>
+<defs>
+<linearGradient id="story-gradient" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#7A2FF7" stop-opacity="0" />
+<stop offset="45%" stop-color="#7A2FF7" stop-opacity="0.5" />
+<stop offset="70%" stop-color="#FF3DF2" stop-opacity="0.4" />
+<stop offset="100%" stop-color="#FF3DF2" stop-opacity="0" />
+</linearGradient>
+</defs>
+</svg>
+<div id="story-rocket"></div>
+</div>
+<div aria-hidden="true" class="bg-halo halo-1"></div>
+<div aria-hidden="true" class="bg-point point-1"></div>
+<div aria-hidden="true" class="bg-point point-2"></div>
+<div aria-hidden="true" class="bg-point point-3"></div>
+<div aria-hidden="true" class="bg-point point-4"></div>
 <nav class="fixed w-full z-50 top-0 left-0 border-b border-slate-200 dark:border-slate-800/50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 <div class="flex justify-between items-center h-20">
@@ -208,22 +386,9 @@
 </svg>
 </div>
 <main id="inicio" class="flex-grow relative flex items-center justify-center pt-20 pb-12 md:pb-20 overflow-hidden scroll-mt-24">
-<div class="absolute inset-0 bg-background-light dark:bg-background-dark z-0">
-<div class="absolute inset-0 hidden dark:block bg-hero-gradient opacity-60"></div>
-<div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 dark:opacity-10 mix-blend-overlay pointer-events-none"></div>
-<svg class="absolute bottom-0 left-0 w-full h-full pointer-events-none z-0 opacity-20 dark:opacity-40" fill="none" viewBox="0 0 1440 800" xmlns="http://www.w3.org/2000/svg">
-<path class="trajectory-path hidden md:block" d="M-100 800 C 200 700, 400 600, 600 400 S 1000 100, 1300 -100" stroke="url(#gradient-line)" stroke-linecap="round" stroke-width="2"></path>
-<defs>
-<linearGradient gradientUnits="userSpaceOnUse" id="gradient-line" x1="-100" x2="1300" y1="800" y2="-100">
-<stop offset="0%" stop-color="#3B0A6F" stop-opacity="0"></stop>
-<stop offset="50%" stop-color="#7A2FF7"></stop>
-<stop offset="100%" stop-color="#8B3DFF" stop-opacity="0"></stop>
-</linearGradient>
-</defs>
-</svg>
-</div>
 <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-12 md:py-24 grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-<div class="space-y-8 text-center lg:text-left">
+<div class="space-y-8 text-center lg:text-left relative">
+<div aria-hidden="true" class="hero-halo"></div>
 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mx-auto lg:mx-0">
 <span class="relative flex h-2 w-2">
 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
@@ -235,7 +400,7 @@
                     Soluciones digitales <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent-purple">claras</span> para negocios que quieren crecer
                 </h1>
 <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                    Transformamos ideas complejas en experiencias web de alto impacto. Estrategia, diseño y desarrollo fusionados para impulsar tu presencia online al siguiente nivel.
+                    Desarrollo web, digitalización comercial y apoyo en herramientas digitales reales para mejorar tu presencia online.
                 </p>
 <div class="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start pt-4">
 <a class="primary-glow-btn w-full sm:w-auto px-8 py-4 rounded-lg bg-primary text-white font-semibold text-base flex items-center justify-center gap-2 group" href="#contacto">
@@ -250,72 +415,54 @@
 <div class="pt-8 flex flex-wrap items-center justify-center lg:justify-start gap-3 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
 <p class="text-sm text-slate-500 dark:text-slate-500 font-medium mr-2">Tecnologías:</p>
 <div class="flex flex-wrap gap-3">
-<span class="px-3 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-500 dark:text-slate-400">Next.js</span>
-<span class="px-3 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-500 dark:text-slate-400">Tailwind</span>
-<span class="px-3 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-500 dark:text-slate-400">Figma</span>
-<span class="px-3 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-500 dark:text-slate-400">Meta</span>
-<span class="px-3 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-500 dark:text-slate-400">Jules</span>
-<span class="px-3 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-500 dark:text-slate-400">Stick</span>
-<span class="px-3 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-500 dark:text-slate-400">Google</span>
-<span class="px-3 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-500 dark:text-slate-400">GitHub Pages</span>
-<span class="px-3 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-500 dark:text-slate-400">GitHub</span>
+<span class="tech-chip px-3 py-1 rounded-full border text-xs font-semibold">WordPress</span>
+<span class="tech-chip px-3 py-1 rounded-full border text-xs font-semibold">WooCommerce</span>
+<span class="tech-chip px-3 py-1 rounded-full border text-xs font-semibold">Elementor</span>
+<span class="tech-chip px-3 py-1 rounded-full border text-xs font-semibold">Temas personalizados</span>
+<span class="tech-chip px-3 py-1 rounded-full border text-xs font-semibold">HTML · CSS · JavaScript</span>
+<span class="tech-chip px-3 py-1 rounded-full border text-xs font-semibold">Tailwind CSS</span>
+<span class="tech-chip px-3 py-1 rounded-full border text-xs font-semibold">Figma</span>
+<span class="tech-chip px-3 py-1 rounded-full border text-xs font-semibold">Meta (Facebook · Instagram)</span>
+<span class="tech-chip px-3 py-1 rounded-full border text-xs font-semibold">Google</span>
+<span class="tech-chip px-3 py-1 rounded-full border text-xs font-semibold">WhatsApp Business</span>
+<span class="tech-chip px-3 py-1 rounded-full border text-xs font-semibold">GitHub</span>
+<span class="tech-chip px-3 py-1 rounded-full border text-xs font-semibold">GitHub Pages</span>
 </div>
 </div>
 </div>
-<div class="relative lg:h-[600px] flex items-center justify-center perspective-1000">
-<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-primary/20 dark:bg-primary/20 blur-[100px] rounded-full pointer-events-none"></div>
-<div class="relative w-full max-w-md animate-float">
-<div class="absolute -top-6 -right-6 z-20 bg-surface-dark/90 backdrop-blur-md border border-slate-700 p-4 rounded-xl shadow-2xl animate-bounce" style="animation-duration: 3s;">
-<div class="flex items-center gap-3">
-<div class="bg-green-500/20 p-2 rounded-lg">
-<span class="material-icons text-green-500">trending_up</span>
+<div class="relative lg:h-[560px] flex items-center justify-center">
+<div class="relative w-full max-w-lg aspect-square">
+<div aria-hidden="true" class="hero-double-ring">
+    <svg viewBox="0 0 520 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle class="ring-outer" cx="260" cy="260" r="210" stroke-width="1" />
+        <circle class="ring-inner" cx="260" cy="260" r="170" stroke-width="1" />
+    </svg>
 </div>
-<div>
-<p class="text-xs text-slate-400">Crecimiento</p>
-<p class="text-sm font-bold text-white">+145%</p>
-</div>
-</div>
-</div>
-<div class="absolute -bottom-8 -left-8 z-20 bg-surface-dark/90 backdrop-blur-md border border-slate-700 p-4 rounded-xl shadow-2xl animate-bounce" style="animation-duration: 4s;">
-<div class="flex items-center gap-3">
-<div class="bg-primary/20 p-2 rounded-lg">
-<span class="material-icons text-primary">code</span>
-</div>
-<div>
-<p class="text-xs text-slate-400">Código Limpio</p>
-<p class="text-sm font-bold text-white">Optimizado</p>
-</div>
-</div>
-</div>
-<div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-700 group">
-<div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 via-transparent to-transparent z-10"></div>
-<img alt="Fundador de RJS LAB sosteniendo tarjeta de presentación con el logo de la empresa" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNexGeCbZloL2-U70PnNxg0yaJKzA1ho-0kzyrGE_rDvktux19g6HiQVzNvudW34sJLnnSqD_h5Li6pToxmcFnQn873bSH_nf4rxPpCxj-XA3mZvx8iT1q9zTpSeIQc8ADLINsOPV8L3AiIQjXanP07eJ2Yp_HxpiWqKTf6elosxwhTuVJAhy4DtOKFmoUhSqslALx_Vz98tE4PKB2aiIKWwC4gMSJy8CCakDZwQTouFsT2fCppvXxfhBnzWDQkZUTyE_1pptcY1Rt"/>
-<div class="absolute bottom-4 right-4 w-full p-6 z-20 flex flex-col items-end text-right">
-<div class="flex items-center gap-3 mb-1">
-<span class="inline-block w-2 h-2 rounded-full bg-green-500"></span>
-<span class="text-xs font-medium text-slate-300 uppercase tracking-wider">Disponible para proyectos</span>
-</div>
-<h3 class="text-white font-display font-bold text-xl">RJS LAB Team</h3>
-<p class="text-slate-300 text-sm">Expertos en Desarrollo Web</p>
-</div>
-</div>
-<div class="absolute -z-10 top-10 -right-10 w-24 h-24 border-2 border-primary/30 rounded-full"></div>
-<div class="absolute -z-10 bottom-20 -left-10 w-16 h-16 border-2 border-accent-purple/30 rounded-full"></div>
+<svg class="absolute inset-0 w-full h-full" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="hero-line" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#7A2FF7" stop-opacity="0"/>
+<stop offset="50%" stop-color="#A855F7"/>
+<stop offset="100%" stop-color="#7A2FF7" stop-opacity="0"/>
+</linearGradient>
+</defs>
+<path class="hero-path" d="M20 320 C 120 280, 200 220, 280 140 S 360 40, 390 20" stroke="url(#hero-line)" stroke-linecap="round"/>
+<path class="hero-path" d="M40 360 C 140 320, 220 250, 300 170 S 360 80, 380 50" stroke="url(#hero-line)" stroke-linecap="round"/>
+<circle cx="290" cy="140" r="6" fill="#A855F7" opacity="0.8"/>
+</svg>
 </div>
 </div>
 </div>
 </main>
 <section id="servicios" class="flex-grow flex items-center justify-center py-20 md:py-28 px-4 md:px-8 overflow-hidden relative section-reveal scroll-mt-24" data-reveal>
-<div class="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl -z-10 animate-pulse"></div>
-<div class="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary-glow/10 rounded-full blur-3xl -z-10"></div>
 <div class="max-w-7xl w-full flex flex-col gap-12">
 <div class="text-center space-y-4">
-<h2 class="text-sm font-bold uppercase tracking-widest text-secondary-glow mb-2">Lo que hacemos</h2>
-<h1 class="text-4xl md:text-5xl font-bold text-text-light-primary dark:text-text-dark-primary">
+<p class="text-sm font-bold uppercase tracking-widest text-secondary-glow mb-2">Lo que hacemos</p>
+<h2 class="text-4xl md:text-5xl font-bold text-text-light-primary dark:text-text-dark-primary">
                     Servicios <span class="text-primary dark:text-primary-glow">Principales</span>
-</h1>
+                </h2>
 <p class="max-w-2xl mx-auto text-text-light-secondary dark:text-text-dark-secondary text-lg">
-                    Impulsamos tu negocio con soluciones digitales innovadoras, desde el desarrollo web hasta la transformación completa de tu marca.
+                    Desarrollo web Costa Rica, páginas web para negocios, catálogos digitales y soporte técnico para mejorar tu presencia online y facilitar el contacto con tus clientes.
                 </p>
 </div>
 <div class="relative w-full group">
@@ -324,66 +471,252 @@
 </button>
 <div class="carousel-viewport pb-8 pt-4 px-4" id="services-carousel">
 <div class="carousel-track">
-<div class="carousel-card bg-card-light dark:bg-card-dark rounded-2xl p-8 border border-gray-200 dark:border-primary hover:border-secondary-glow dark:hover:border-secondary-glow transition-all duration-300 transform hover:-translate-y-2 shadow-xl hover:shadow-neon-purple flex flex-col gap-6 group/card relative overflow-hidden">
-<div class="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover/card:scale-150"></div>
-<div class="w-16 h-16 rounded-xl bg-gray-100 dark:bg-[#1A1A24] flex items-center justify-center border border-gray-200 dark:border-primary/50 shadow-inner">
-<span class="material-icons text-4xl text-primary dark:text-primary-glow">code</span>
+<article class="carousel-card bg-card-light dark:bg-card-dark rounded-2xl p-8 border border-gray-200 dark:border-primary shadow-xl flex flex-col gap-5">
+<div>
+<div class="flex items-center gap-3">
+<span class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-icons text-xl">language</span>
+</span>
+<h3 class="text-2xl font-bold text-text-light-primary dark:text-text-dark-primary">Sitio Web Básico</h3>
+</div>
+<p class="text-text-light-secondary dark:text-text-dark-secondary mt-2">Web informativa clara para presentar tu negocio y generar consultas.</p>
 </div>
 <div>
-<h3 class="text-2xl font-bold text-text-light-primary dark:text-text-dark-primary mb-3">Desarrollo Web</h3>
-<p class="text-text-light-secondary dark:text-text-dark-secondary leading-relaxed">
-                                Sitios web a medida, rápidos y optimizados para SEO. Creamos experiencias digitales que convierten visitantes en clientes.
-                            </p>
-</div>
-<a class="mt-auto flex items-center text-sm font-bold text-primary dark:text-primary-glow hover:text-secondary-glow dark:hover:text-secondary-glow transition-colors gap-2" href="#">
-                            VER MÁS <span class="material-icons text-base">arrow_forward</span>
-</a>
-</div>
-<div class="carousel-card bg-card-light dark:bg-card-dark rounded-2xl p-8 border border-gray-200 dark:border-primary hover:border-secondary-glow dark:hover:border-secondary-glow transition-all duration-300 transform hover:-translate-y-2 shadow-xl hover:shadow-neon-purple flex flex-col gap-6 group/card relative overflow-hidden">
-<div class="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover/card:scale-150"></div>
-<div class="w-16 h-16 rounded-xl bg-gray-100 dark:bg-[#1A1A24] flex items-center justify-center border border-gray-200 dark:border-primary/50 shadow-inner">
-<span class="material-icons text-4xl text-primary dark:text-primary-glow">storefront</span>
+<p class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">Incluye</p>
+<ul class="mt-2 space-y-2 text-sm text-text-light-secondary dark:text-text-dark-secondary list-disc list-inside">
+<li>1 a 3 secciones clave (Inicio, Servicios, Contacto)</li>
+<li>Diseño responsivo y profesional</li>
+<li>Botón fijo de WhatsApp</li>
+<li>Formulario de contacto simple</li>
+<li>SEO básico y mapa del sitio</li>
+</ul>
 </div>
 <div>
-<h3 class="text-2xl font-bold text-text-light-primary dark:text-text-dark-primary mb-3">Catálogos y Comercio</h3>
-<p class="text-text-light-secondary dark:text-text-dark-secondary leading-relaxed">
-                                Plataformas de e-commerce robustas y catálogos interactivos diseñados para maximizar tus ventas online.
-                            </p>
+<p class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">Cómo ayuda al comercio</p>
+<ul class="mt-2 space-y-2 text-sm text-text-light-secondary dark:text-text-dark-secondary list-disc list-inside">
+<li>Mejora la confianza de nuevos clientes</li>
+<li>Facilita el contacto inmediato</li>
+<li>Ordena la información del negocio</li>
+</ul>
 </div>
-<a class="mt-auto flex items-center text-sm font-bold text-primary dark:text-primary-glow hover:text-secondary-glow dark:hover:text-secondary-glow transition-colors gap-2" href="#">
-                            VER MÁS <span class="material-icons text-base">arrow_forward</span>
-</a>
+<p class="text-base font-bold text-primary dark:text-primary-glow">Precio base: ₡120.000</p>
+<a class="mt-auto inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary text-white font-semibold hover:bg-primary-dark transition-colors" href="https://wa.me/50685075310?text=Quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20servicio%20de%20Sitio%20Web%20B%C3%A1sico" target="_blank" rel="noreferrer">Contactar por WhatsApp <span class="material-icons text-base">chat</span></a>
+</article>
+<article class="carousel-card bg-card-light dark:bg-card-dark rounded-2xl p-8 border border-gray-200 dark:border-primary shadow-xl flex flex-col gap-5">
+<div>
+<div class="flex items-center gap-3">
+<span class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-icons text-xl">business</span>
+</span>
+<h3 class="text-2xl font-bold text-text-light-primary dark:text-text-dark-primary">Sitio Web Corporativo</h3>
 </div>
-<div class="carousel-card bg-card-light dark:bg-card-dark rounded-2xl p-8 border border-gray-200 dark:border-primary hover:border-secondary-glow dark:hover:border-secondary-glow transition-all duration-300 transform hover:-translate-y-2 shadow-xl hover:shadow-neon-purple flex flex-col gap-6 group/card relative overflow-hidden">
-<div class="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover/card:scale-150"></div>
-<div class="w-16 h-16 rounded-xl bg-gray-100 dark:bg-[#1A1A24] flex items-center justify-center border border-gray-200 dark:border-primary/50 shadow-inner">
-<span class="material-icons text-4xl text-primary dark:text-primary-glow">rocket_launch</span>
+<p class="text-text-light-secondary dark:text-text-dark-secondary mt-2">Sitio completo enfocado en servicios, credibilidad y conversiones.</p>
 </div>
 <div>
-<h3 class="text-2xl font-bold text-text-light-primary dark:text-text-dark-primary mb-3">Digitalización Comercial</h3>
-<p class="text-text-light-secondary dark:text-text-dark-secondary leading-relaxed">
-                                Transformamos procesos tradicionales en flujos de trabajo digitales eficientes para potenciar la productividad.
-                            </p>
-</div>
-<a class="mt-auto flex items-center text-sm font-bold text-primary dark:text-primary-glow hover:text-secondary-glow dark:hover:text-secondary-glow transition-colors gap-2" href="#">
-                            VER MÁS <span class="material-icons text-base">arrow_forward</span>
-</a>
-</div>
-<div class="carousel-card bg-card-light dark:bg-card-dark rounded-2xl p-8 border border-gray-200 dark:border-primary hover:border-secondary-glow dark:hover:border-secondary-glow transition-all duration-300 transform hover:-translate-y-2 shadow-xl hover:shadow-neon-purple flex flex-col gap-6 group/card relative overflow-hidden">
-<div class="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover/card:scale-150"></div>
-<div class="w-16 h-16 rounded-xl bg-gray-100 dark:bg-[#1A1A24] flex items-center justify-center border border-gray-200 dark:border-primary/50 shadow-inner">
-<span class="material-icons text-4xl text-primary dark:text-primary-glow">campaign</span>
+<p class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">Incluye</p>
+<ul class="mt-2 space-y-2 text-sm text-text-light-secondary dark:text-text-dark-secondary list-disc list-inside">
+<li>Hasta 5 secciones estratégicas</li>
+<li>Diseño a medida en WordPress</li>
+<li>WhatsApp y formulario avanzado</li>
+<li>Optimización básica de velocidad</li>
+<li>Estructura pensada para leads</li>
+</ul>
 </div>
 <div>
-<h3 class="text-2xl font-bold text-text-light-primary dark:text-text-dark-primary mb-3">Publicidad Digital</h3>
-<p class="text-text-light-secondary dark:text-text-dark-secondary leading-relaxed">
-                                Estrategias de marketing digital, gestión de redes sociales y campañas de ads para alcanzar a tu público ideal.
-                            </p>
+<p class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">Cómo ayuda al comercio</p>
+<ul class="mt-2 space-y-2 text-sm text-text-light-secondary dark:text-text-dark-secondary list-disc list-inside">
+<li>Refuerza la marca y la confianza</li>
+<li>Explica servicios con claridad</li>
+<li>Incrementa solicitudes de contacto</li>
+</ul>
 </div>
-<a class="mt-auto flex items-center text-sm font-bold text-primary dark:text-primary-glow hover:text-secondary-glow dark:hover:text-secondary-glow transition-colors gap-2" href="#">
-                            VER MÁS <span class="material-icons text-base">arrow_forward</span>
-</a>
+<p class="text-base font-bold text-primary dark:text-primary-glow">Precio base: ₡180.000</p>
+<a class="mt-auto inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary text-white font-semibold hover:bg-primary-dark transition-colors" href="https://wa.me/50685075310?text=Deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20Sitio%20Web%20Corporativo" target="_blank" rel="noreferrer">Contactar por WhatsApp <span class="material-icons text-base">chat</span></a>
+</article>
+<article class="carousel-card bg-card-light dark:bg-card-dark rounded-2xl p-8 border border-gray-200 dark:border-primary shadow-xl flex flex-col gap-5">
+<div>
+<div class="flex items-center gap-3">
+<span class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-icons text-xl">view_list</span>
+</span>
+<h3 class="text-2xl font-bold text-text-light-primary dark:text-text-dark-primary">Catálogo Digital</h3>
 </div>
+<p class="text-text-light-secondary dark:text-text-dark-secondary mt-2">Catálogo digital con productos/servicios y contacto rápido por WhatsApp.</p>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">Incluye</p>
+<ul class="mt-2 space-y-2 text-sm text-text-light-secondary dark:text-text-dark-secondary list-disc list-inside">
+<li>Listado con categorías claras</li>
+<li>Botón de WhatsApp por producto</li>
+<li>Galería optimizada de imágenes</li>
+<li>Diseño mobile-first</li>
+<li>Integración directa con WhatsApp</li>
+</ul>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">Cómo ayuda al comercio</p>
+<ul class="mt-2 space-y-2 text-sm text-text-light-secondary dark:text-text-dark-secondary list-disc list-inside">
+<li>Muestra la oferta de forma simple</li>
+<li>Reduce consultas repetidas</li>
+<li>Acelera ventas por mensaje</li>
+</ul>
+</div>
+<p class="text-base font-bold text-primary dark:text-primary-glow">Precio base: ₡160.000</p>
+<a class="mt-auto inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary text-white font-semibold hover:bg-primary-dark transition-colors" href="https://wa.me/50685075310?text=Quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20Cat%C3%A1logo%20Digital" target="_blank" rel="noreferrer">Contactar por WhatsApp <span class="material-icons text-base">chat</span></a>
+</article>
+<article class="carousel-card bg-card-light dark:bg-card-dark rounded-2xl p-8 border border-gray-200 dark:border-primary shadow-xl flex flex-col gap-5">
+<div>
+<div class="flex items-center gap-3">
+<span class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-icons text-xl">shopping_bag</span>
+</span>
+<h3 class="text-2xl font-bold text-text-light-primary dark:text-text-dark-primary">Tienda en Línea</h3>
+</div>
+<p class="text-text-light-secondary dark:text-text-dark-secondary mt-2">Ecommerce básico en WooCommerce para vender 24/7.</p>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">Incluye</p>
+<ul class="mt-2 space-y-2 text-sm text-text-light-secondary dark:text-text-dark-secondary list-disc list-inside">
+<li>Instalación de WooCommerce</li>
+<li>Carga inicial de productos</li>
+<li>Métodos de pago y envío</li>
+<li>Panel de pedidos organizado</li>
+<li>WhatsApp para soporte</li>
+</ul>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">Cómo ayuda al comercio</p>
+<ul class="mt-2 space-y-2 text-sm text-text-light-secondary dark:text-text-dark-secondary list-disc list-inside">
+<li>Habilita ventas automatizadas</li>
+<li>Ordena pedidos en un solo lugar</li>
+<li>Amplía el alcance del negocio</li>
+</ul>
+</div>
+<p class="text-base font-bold text-primary dark:text-primary-glow">Precio base: ₡250.000</p>
+<a class="mt-auto inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary text-white font-semibold hover:bg-primary-dark transition-colors" href="https://wa.me/50685075310?text=Deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20Tienda%20en%20L%C3%ADnea" target="_blank" rel="noreferrer">Contactar por WhatsApp <span class="material-icons text-base">chat</span></a>
+</article>
+<article class="carousel-card bg-card-light dark:bg-card-dark rounded-2xl p-8 border border-gray-200 dark:border-primary shadow-xl flex flex-col gap-5">
+<div>
+<div class="flex items-center gap-3">
+<span class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-icons text-xl">chat</span>
+</span>
+<h3 class="text-2xl font-bold text-text-light-primary dark:text-text-dark-primary">Configuración WhatsApp Business</h3>
+</div>
+<p class="text-text-light-secondary dark:text-text-dark-secondary mt-2">Configuración profesional para atención y ventas por WhatsApp.</p>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">Incluye</p>
+<ul class="mt-2 space-y-2 text-sm text-text-light-secondary dark:text-text-dark-secondary list-disc list-inside">
+<li>Perfil comercial optimizado</li>
+<li>Mensajes automáticos y respuestas rápidas</li>
+<li>Catálogo inicial configurado</li>
+<li>Etiquetas y organización</li>
+</ul>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">Cómo ayuda al comercio</p>
+<ul class="mt-2 space-y-2 text-sm text-text-light-secondary dark:text-text-dark-secondary list-disc list-inside">
+<li>Respuestas más rápidas y claras</li>
+<li>Menos tiempo en tareas repetidas</li>
+<li>Imagen profesional al instante</li>
+</ul>
+</div>
+<p class="text-base font-bold text-primary dark:text-primary-glow">Precio base: ₡50.000</p>
+<a class="mt-auto inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary text-white font-semibold hover:bg-primary-dark transition-colors" href="https://wa.me/50685075310?text=Quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20WhatsApp%20Business" target="_blank" rel="noreferrer">Contactar por WhatsApp <span class="material-icons text-base">chat</span></a>
+</article>
+<article class="carousel-card bg-card-light dark:bg-card-dark rounded-2xl p-8 border border-gray-200 dark:border-primary shadow-xl flex flex-col gap-5">
+<div>
+<div class="flex items-center gap-3">
+<span class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-icons text-xl">inventory_2</span>
+</span>
+<h3 class="text-2xl font-bold text-text-light-primary dark:text-text-dark-primary">Carga de Catálogo en WhatsApp</h3>
+</div>
+<p class="text-text-light-secondary dark:text-text-dark-secondary mt-2">Carga ordenada de productos con fotos y descripciones claras.</p>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">Incluye</p>
+<ul class="mt-2 space-y-2 text-sm text-text-light-secondary dark:text-text-dark-secondary list-disc list-inside">
+<li>Hasta 30 productos cargados</li>
+<li>Organización por categorías</li>
+<li>Imágenes y descripciones optimizadas</li>
+<li>Catálogo listo para compartir</li>
+</ul>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">Cómo ayuda al comercio</p>
+<ul class="mt-2 space-y-2 text-sm text-text-light-secondary dark:text-text-dark-secondary list-disc list-inside">
+<li>Ventas más ágiles por WhatsApp</li>
+<li>Menos errores en la atención</li>
+<li>Mejor experiencia de compra</li>
+</ul>
+</div>
+<p class="text-base font-bold text-primary dark:text-primary-glow">Precio base: ₡40.000</p>
+<a class="mt-auto inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary text-white font-semibold hover:bg-primary-dark transition-colors" href="https://wa.me/50685075310?text=Deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20carga%20de%20cat%C3%A1logo%20en%20WhatsApp" target="_blank" rel="noreferrer">Contactar por WhatsApp <span class="material-icons text-base">chat</span></a>
+</article>
+<article class="carousel-card bg-card-light dark:bg-card-dark rounded-2xl p-8 border border-gray-200 dark:border-primary shadow-xl flex flex-col gap-5">
+<div>
+<div class="flex items-center gap-3">
+<span class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-icons text-xl">campaign</span>
+</span>
+<h3 class="text-2xl font-bold text-text-light-primary dark:text-text-dark-primary">Campañas Publicitarias Digitales</h3>
+</div>
+<p class="text-text-light-secondary dark:text-text-dark-secondary mt-2">Campañas en Meta orientadas a alcance y generación de contactos.</p>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">Incluye</p>
+<ul class="mt-2 space-y-2 text-sm text-text-light-secondary dark:text-text-dark-secondary list-disc list-inside">
+<li>Configuración de campaña</li>
+<li>Segmentación inicial</li>
+<li>Creativos simples y directos</li>
+<li>Enlace a WhatsApp o sitio web</li>
+</ul>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">Cómo ayuda al comercio</p>
+<ul class="mt-2 space-y-2 text-sm text-text-light-secondary dark:text-text-dark-secondary list-disc list-inside">
+<li>Mayor visibilidad local</li>
+<li>Genera contactos medibles</li>
+<li>Apoya ventas digitales</li>
+</ul>
+<p class="mt-3 text-xs text-slate-500 dark:text-slate-400">📌 El presupuesto de anuncios se paga directamente a la plataforma.</p>
+</div>
+<p class="text-base font-bold text-primary dark:text-primary-glow">Precio base desde: ₡50.000</p>
+<a class="mt-auto inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary text-white font-semibold hover:bg-primary-dark transition-colors" href="https://wa.me/50685075310?text=Quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20campa%C3%B1as%20publicitarias%20digitales" target="_blank" rel="noreferrer">Contactar por WhatsApp <span class="material-icons text-base">chat</span></a>
+</article>
+<article class="carousel-card bg-card-light dark:bg-card-dark rounded-2xl p-8 border border-gray-200 dark:border-primary shadow-xl flex flex-col gap-5">
+<div>
+<div class="flex items-center gap-3">
+<span class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-icons text-xl">build_circle</span>
+</span>
+<h3 class="text-2xl font-bold text-text-light-primary dark:text-text-dark-primary">Mantenimiento Web Mensual</h3>
+</div>
+<p class="text-text-light-secondary dark:text-text-dark-secondary mt-2">Soporte continuo para seguridad, rendimiento y estabilidad.</p>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">Incluye</p>
+<ul class="mt-2 space-y-2 text-sm text-text-light-secondary dark:text-text-dark-secondary list-disc list-inside">
+<li>Actualizaciones programadas</li>
+<li>Respaldos periódicos</li>
+<li>Cambios menores incluidos</li>
+<li>Soporte técnico</li>
+</ul>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">Cómo ayuda al comercio</p>
+<ul class="mt-2 space-y-2 text-sm text-text-light-secondary dark:text-text-dark-secondary list-disc list-inside">
+<li>Evita fallos y vulnerabilidades</li>
+<li>Mejora la estabilidad del sitio</li>
+<li>Asegura continuidad digital</li>
+</ul>
+</div>
+<p class="text-base font-bold text-primary dark:text-primary-glow">Desde ₡20.000 / mes</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Depende del servicio contratado y el alcance de los mantenimientos.</p>
+<a class="mt-auto inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary text-white font-semibold hover:bg-primary-dark transition-colors" href="https://wa.me/50685075310?text=Deseo%20informaci%C3%B3n%20sobre%20el%20mantenimiento%20web%20mensual" target="_blank" rel="noreferrer">Contactar por WhatsApp <span class="material-icons text-base">chat</span></a>
+</article>
 </div>
 </div>
 <button aria-label="Siguiente" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-10 z-10 p-3 rounded-full bg-card-light dark:bg-card-dark shadow-lg border border-gray-200 dark:border-primary/30 text-primary hover:scale-110 transition-transform hidden md:flex items-center justify-center hover:shadow-neon-purple" data-carousel="next">
@@ -395,6 +728,10 @@
 <button class="w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-700 hover:bg-primary transition-colors" data-carousel-dot="1" aria-label="Ir al servicio 2"></button>
 <button class="w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-700 hover:bg-primary transition-colors" data-carousel-dot="2" aria-label="Ir al servicio 3"></button>
 <button class="w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-700 hover:bg-primary transition-colors" data-carousel-dot="3" aria-label="Ir al servicio 4"></button>
+<button class="w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-700 hover:bg-primary transition-colors" data-carousel-dot="4" aria-label="Ir al servicio 5"></button>
+<button class="w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-700 hover:bg-primary transition-colors" data-carousel-dot="5" aria-label="Ir al servicio 6"></button>
+<button class="w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-700 hover:bg-primary transition-colors" data-carousel-dot="6" aria-label="Ir al servicio 7"></button>
+<button class="w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-700 hover:bg-primary transition-colors" data-carousel-dot="7" aria-label="Ir al servicio 8"></button>
 </div>
 </div>
 </section>
@@ -402,7 +739,6 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
 <div class="lg:col-span-5 relative group order-2 lg:order-1">
-<div class="absolute -inset-4 bg-primary/40 dark:bg-primary/30 rounded-full blur-3xl opacity-75 group-hover:opacity-100 transition duration-1000 animate-pulse"></div>
 <div class="relative overflow-hidden rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 transform transition duration-500 hover:scale-[1.02]">
 <div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 via-transparent to-transparent z-10"></div>
 <img alt="Andrés - Fundador de RJS LAB" class="w-full h-auto object-cover grayscale-[20%] group-hover:grayscale-0 transition duration-700" src="src/img/Andres.webp"/>
@@ -416,15 +752,11 @@
 </svg>
 </div>
 </div>
-<div class="lg:col-span-7 space-y-8 order-1 lg:order-2">
+<div class="lg:col-span-7 space-y-8 order-1 lg:order-2 relative">
 <div class="space-y-4">
-<div class="flex items-center space-x-2">
-<span class="h-px w-8 bg-primary"></span>
-<span class="text-primary font-bold tracking-widest text-sm uppercase">Identidad &amp; Visión</span>
-</div>
-<h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white leading-tight">
-                            Enfoque <span class="text-gradient">profesional</span> y práctico
-                        </h1>
+<h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white leading-tight">
+                            Forma de trabajo <span class="text-gradient">clara</span> y práctica
+                        </h2>
 </div>
 <div class="relative py-4">
 <div aria-hidden="true" class="absolute inset-0 flex items-center">
@@ -432,7 +764,7 @@
 </div>
 <div class="relative flex justify-start">
 <span class="bg-background-light dark:bg-background-dark pr-4 text-slate-400 dark:text-slate-500 flex items-center gap-3">
-<span class="text-xs uppercase tracking-wider font-semibold text-slate-400 dark:text-slate-500">Evolución Digital</span>
+<span class="text-xs uppercase tracking-wider font-semibold text-slate-400 dark:text-slate-500">Proceso de trabajo</span>
 <svg class="w-5 h-5 text-primary transform rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
 <path d="M12 12L20 4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
@@ -443,10 +775,10 @@
 </div>
 <div class="prose prose-lg text-slate-600 dark:text-slate-300">
 <p>
-                            En un mundo digital en constante cambio, la adaptabilidad es clave. En <strong class="text-slate-900 dark:text-white">RJS LAB</strong>, fusiono la creatividad técnica con estrategias de negocio sólidas.
+                            Trabajo con procesos claros y comunicación directa, enfocándome en mejoras concretas de presencia digital, organización de información y contacto eficiente con clientes.
                         </p>
 <p class="mt-4">
-                            Con una amplia trayectoria en el ecosistema <span class="text-primary font-medium">WordPress</span> y desarrollo de soluciones a medida, ayudo a marcas y empresas a escalar su presencia online. No se trata solo de código, se trata de construir herramientas que funcionen para ti y tus clientes.
+                            Desarrollo sitios en <span class="text-primary font-medium">WordPress</span> con una implementación ordenada, enfocada en claridad, rendimiento y mantenimiento sencillo.
                         </p>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
@@ -455,8 +787,8 @@
 <span class="material-icons">code</span>
 </div>
 <div>
-<h3 class="font-bold text-slate-900 dark:text-white">Desarrollo Custom</h3>
-<p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Soluciones personalizadas y optimización de rendimiento.</p>
+<h3 class="font-bold text-slate-900 dark:text-white">Desarrollo Web</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Sitios funcionales y claros, adaptados al tamaño real de tu negocio.</p>
 </div>
 </div>
 <div class="flex items-start gap-4 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
@@ -465,20 +797,9 @@
 </div>
 <div>
 <h3 class="font-bold text-slate-900 dark:text-white">Digitalización</h3>
-<p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Estrategias para llevar tu negocio al siguiente nivel.</p>
+<p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Implementación de herramientas para mejorar visibilidad, contacto y orden comercial.</p>
 </div>
 </div>
-</div>
-<div class="flex flex-wrap items-center gap-4 pt-4">
-<a class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-primary rounded-lg hover:bg-primary-dark focus:ring-4 focus:ring-purple-300 dark:focus:ring-purple-900 transition-all shadow-lg shadow-purple-500/25" href="#">
-                            Ver Portafolio
-                            <svg aria-hidden="true" class="w-4 h-4 ml-2 rtl:rotate-180" fill="none" viewBox="0 0 14 10" xmlns="http://www.w3.org/2000/svg">
-<path d="M1 5h12m0 0L9 1m4 4L9 9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-</a>
-<a class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-slate-900 dark:text-white bg-transparent border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 focus:ring-4 focus:ring-slate-100 dark:focus:ring-slate-700 transition-all" href="#">
-                            Leer más sobre mí
-                        </a>
 </div>
 </div>
 </div>
@@ -489,10 +810,10 @@
 <div class="lg:col-span-5 flex flex-col justify-center h-full space-y-8 lg:sticky lg:top-12">
 <div>
 <img alt="Logo de RJS LAB" class="w-20 h-20 object-contain drop-shadow-[0_0_15px_rgba(217,70,239,0.5)] rounded-2xl mb-6" src="src/img/Logo_1.webp"/>
-<h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 dark:text-white leading-tight">
+<h2 class="text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 dark:text-white leading-tight">
                         Llevamos tu negocio <br/>
 <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">al siguiente nivel.</span>
-</h1>
+</h2>
 </div>
 <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
                     Especialistas en desarrollo web y digitalización de negocios. Convierte tus ideas en una realidad digital escalable y moderna.
@@ -504,7 +825,7 @@
 </div>
 <div>
 <p class="text-sm font-semibold text-gray-900 dark:text-white">Fundador RJS LAB</p>
-<p class="text-xs text-primary font-medium">Consultor Digital &amp; Desarrollador</p>
+<p class="text-xs text-primary font-medium">Desarrollador Web</p>
 </div>
 </div>
 <div class="hidden lg:block pt-8">
@@ -594,18 +915,14 @@
                                 Tipo de servicio
                             </label>
 <div class="relative">
-<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
-<svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-<path clip-rule="evenodd" d="M7 2a1 1 0 00-.707 1.707L7 4.414v3.758a1 1 0 01-.293.707l-4 4C.817 14.769 2.156 18 4.828 18h10.344c2.673 0 4.012-3.231 2.122-5.121l-4-4A1 1 0 0113 8.172V4.414l.707-.707A1 1 0 0013 2H7zm2 6.172V4h2v4.172a3 3 0 00.879 2.12l1.027 1.028a4 4 0 00-2.171.102l-.47.156a4 4 0 01-2.53 0l-.563-.187a1.993 1.993 0 00-.114-.035l1.063-1.063A3 3 0 009 8.172z" fill-rule="evenodd"></path>
-</svg>
-</div>
-<select class="block w-full pl-10 pr-10 py-3 bg-gray-50 dark:bg-input-dark border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 appearance-none" id="service" name="service">
+<select class="block w-full pr-10 py-3 bg-gray-50 dark:bg-input-dark border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 appearance-none" id="service" name="service">
 <option disabled="" selected="" value="">Selecciona una opción...</option>
-<option value="web-dev">Desarrollo Web</option>
-<option value="ecommerce">E-Commerce</option>
-<option value="app-dev">Aplicación Móvil</option>
-<option value="seo">SEO &amp; Marketing</option>
-<option value="other">Otro</option>
+<option value="web">Desarrollo web</option>
+<option value="catalogo">Catálogo digital</option>
+<option value="tienda">Tienda en línea</option>
+<option value="whatsapp">WhatsApp Business</option>
+<option value="publicidad">Publicidad digital</option>
+<option value="mantenimiento">Mantenimiento mensual</option>
 </select>
 <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
 <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -645,7 +962,7 @@
 </div>
 </div>
 </section>
-<footer class="border-t border-slate-200 dark:border-slate-800 bg-background-light dark:bg-background-dark">
+<footer class="border-t border-slate-800 bg-transparent">
 <div class="max-w-7xl mx-auto px-4 py-12 md:py-16">
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
 <div class="space-y-4">
@@ -669,6 +986,7 @@
 <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
 <li>📍 Costa Rica</li>
 <li>📧 info@rjs-lab.com</li>
+<li>📷 <a class="hover:text-primary transition-colors" href="https://www.instagram.com/rjslabs/" target="_blank" rel="noreferrer">Instagram</a></li>
 <li>📱 <a class="hover:text-primary transition-colors" href="https://wa.me/50685075310?text=Hola%2C%20me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20servicios." target="_blank" rel="noreferrer">WhatsApp</a></li>
 <li>Atención bajo cita previa.</li>
 </ul>
@@ -679,9 +997,9 @@
 </div>
 </div>
 </div>
-<div class="border-t border-slate-200 dark:border-slate-800">
+<div class="border-t border-slate-800">
 <div class="max-w-7xl mx-auto px-4 py-6 text-center text-sm text-slate-500 dark:text-slate-400">
-© 2026 RJS LAB. Todos los derechos reservados. Desarrollo web y soluciones digitales.
+© 2026 RJS LAB. Todos los derechos reservados. Desarrollo web y soluciones digitales. 🚀
 </div>
 </div>
 </footer>
@@ -773,6 +1091,32 @@
                 scrub: true
             }
         });
+    }
+
+    const storyRocket = document.getElementById('story-rocket');
+    if (storyRocket && window.gsap && window.ScrollTrigger) {
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.to(storyRocket, {
+            x: () => window.innerWidth * 0.85,
+            y: () => -window.innerHeight * 0.2,
+            rotation: 14,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: document.body,
+                start: 'top top',
+                end: 'bottom bottom',
+                scrub: true
+            }
+        });
+    } else if (storyRocket) {
+        window.addEventListener('scroll', () => {
+            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+            const x = (window.innerWidth * 0.85) * progress;
+            const y = (window.innerHeight * -0.2) * progress;
+            const rotation = 14 * progress;
+            storyRocket.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${rotation}deg)`;
+        }, { passive: true });
     }
 
     const carousel = document.getElementById('services-carousel');
@@ -892,6 +1236,7 @@
         updateDots();
         startAuto();
     }
+
 </script>
 
 </body></html>
